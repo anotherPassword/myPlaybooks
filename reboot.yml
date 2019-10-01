@@ -1,10 +1,11 @@
 ---
 - name: Set powerstate of a virtual machine to poweroff by using UUID
-  hosts: "{{ LAB_vCenter }}"
-  vmware_guest:
+  hosts: "{{ LAB_vCenter }}" 
+  vmware_guest_powerstate:
     hostname: "{{ vcenter_hostname }}"
     username: "{{ vcenter_username }}"
     password: "{{ vcenter_password }}"
     validate_certs: no
-    uuid: "{{ vm_uuid }}"
-    state: poweredoff
+    folder: "/MSLAB/Ansible"
+    name: "DGSANSBTST01"
+    state: powered-off
