@@ -1,6 +1,6 @@
 ---
 - name: Set powerstate of a virtual machine to poweroff by using UUID
-  hosts: "{{ LAB_vCenter }}" 
+  hosts: LAB_vCenter 
   vmware_guest_powerstate:
     hostname: "{{ vcenter_hostname }}"
     username: "{{ vcenter_username }}"
