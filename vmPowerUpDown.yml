@@ -14,5 +14,5 @@
         ####
         validate_certs: no
         folder: "/MSLAB/Ansible"
-        name: {{ VM_NAME }}
+        name: "{{ VM_NAME }}"
         state: powered-on
