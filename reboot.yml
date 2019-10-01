@@ -1,10 +1,9 @@
 ---
-tasks:
-  - name: Set powerstate of a virtual machine to poweroff by using UUID
-    vmware_guest:
-      hostname: "{{ vcenter_hostname }}"
-      username: "{{ vcenter_username }}"
-      password: "{{ vcenter_password }}"
-      validate_certs: no
-      uuid: "{{ vm_uuid }}"
-      state: poweredoff
+- name: Set powerstate of a virtual machine to poweroff by using UUID
+vmware_guest:
+  hostname: "{{ vcenter_hostname }}"
+  username: "{{ vcenter_username }}"
+  password: "{{ vcenter_password }}"
+  validate_certs: no
+  uuid: "{{ vm_uuid }}"
+  state: poweredoff
