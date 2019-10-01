@@ -1,5 +1,4 @@
 ---
-- hosts: localhost
 - name: Set the state of a virtual machine to poweroff
   vmware_guest_powerstate:
     hostname: "{{ vcenter_hostname }}"
@@ -9,5 +8,4 @@
     folder: "/MSLAB/Ansible"
     name: "DGSANSBTST01"
     state: powered-off
-  delegate_to: localhost
   register: deploy
