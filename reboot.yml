@@ -1,13 +1,18 @@
 ---
 - name: Set powerstate of a virtual machine to poweroff
+  #run MODULE against localhost
   hosts: localhost
   tasks:
     - name: Stuff for vmware_guest_powerstate
       vmware_guest_powerstate:
+        #feed module information
+        ####
+        #NOT NEEDED part of credential for vcenter lab
         #hostname: mslabvc6.bhcs.pvt
         #username: "{{ vcenter_username }}"
         #password: "{{ vcenter_password }}"
+        ####
         validate_certs: no
         folder: "/MSLAB/Ansible"
         name: "DGSANSBTST01"
-        state: powered-off
+        state: powered-on
