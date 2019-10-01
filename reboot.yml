@@ -4,7 +4,7 @@
   tasks:
     - name: Stuff for vmware_guest_powerstate
       vmware_guest_powerstate:
-        #hostname: "{{ vcenter_hostname }}"
+        hostname: mslabvc6.bhcs.pvt
         #username: "{{ vcenter_username }}"
         #password: "{{ vcenter_password }}"
         validate_certs: no
