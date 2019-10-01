@@ -1,6 +1,6 @@
 ---
 - name: Set powerstate of a virtual machine to poweroff
-  hosts: LAB_vCenter
+  hosts: all
   tasks:
     - name: Stuff for vmware_guest_powerstate
       vmware_guest_powerstate:
