@@ -1,3 +1,4 @@
+---
 - name: Set the state of a virtual machine to poweroff
   vmware_guest_powerstate:
     hostname: "{{ vcenter_hostname }}"
