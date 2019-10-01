@@ -1,4 +1,4 @@
-- hosts: all
+#- hosts: all
   tasks:
     - name: Set powerstate of a virtual machine to poweroff by using UUID
       vmware_guest:
