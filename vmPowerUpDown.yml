@@ -1,5 +1,4 @@
 ---
-
 - name: Set powerstate of a virtual machine to poweroff or on
   #run MODULE against localhost
   hosts: localhost
@@ -17,7 +16,7 @@
         folder: "/MSLAB/Ansible"
         name: "{{ VM_NAME }}"
         state: powered-on
-      when: DESIRED_VM_POWER_STATE == "On"
+      #when: DESIRED_VM_POWER_STATE == "On"
  
     - name: Power Off
       vmware_guest_powerstate:
@@ -32,6 +31,6 @@
         folder: "/MSLAB/Ansible"
         name: "{{ VM_NAME }}"
         state: powered-on
-      when: DESIRED_VM_POWER_STATE == "Off"  
- - debug:
-     var: DESIRED_VM_POWER_STATE
+      #when: DESIRED_VM_POWER_STATE == "Off"  
+ #- debug:
+    # var: DESIRED_VM_POWER_STATE
