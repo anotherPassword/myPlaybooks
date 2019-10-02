@@ -1,0 +1,9 @@
+---
+- name: Set powerstate of a virtual machine to poweroff or on
+  #run MODULE against localhost
+  hosts: localhost
+  tasks:
+    - name: Gather all registered virtual machines
+       vmware_vm_facts:
+         vm_type: vm
+       register: vmfacts
