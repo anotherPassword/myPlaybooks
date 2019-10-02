@@ -1,5 +1,8 @@
 - name: Gather some facts from a guest using the vSphere API output schema
   hosts: localhost
+  vars:
+    datacenter_name: "MSLAB"
+    vm_name: "DGSANSBTST01"
   tasks:
     - name: Gater VM Facts
       vmware_guest_facts:
@@ -7,8 +10,8 @@
         #username: "{{ vcenter_username }}"
         #password: "{{ vcenter_password }}"
         validate_certs: no
-        datacenter: "{{ 'MSLAB' }}"
-        name: "{{ 'DGSANSBTST01' }}"
+        datacenter: "{{ datacenter_name }}"
+        name: "{{ vm_name }}"
         schema: "vsphere"
         properties: ["config.hardware.memoryMB", "guest.disk", "overallStatus"]
         register: facts
