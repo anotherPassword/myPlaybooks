@@ -13,4 +13,4 @@
         properties: ["config.hardware.memoryMB", "guest.disk", "overallStatus"]
         register: facts
     - debug: 
-      msg: "{{ facts }}"
+        msg: "{{ facts }}"
