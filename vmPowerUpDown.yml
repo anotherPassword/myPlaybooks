@@ -34,4 +34,4 @@
         state: powered-on
       when: DESIRED_VM_POWER_STATE == "Off"  
  - debug:
-   var: DESIRED_VM_POWER_STATE
+     var: DESIRED_VM_POWER_STATE
