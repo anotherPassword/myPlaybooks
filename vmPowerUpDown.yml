@@ -32,4 +32,6 @@
         folder: "/MSLAB/Ansible"
         name: "{{ VM_NAME }}"
         state: powered-on
-      when: DESIRED_VM_POWER_STATE == "Off" 
+      when: DESIRED_VM_POWER_STATE == "Off"  
+ - debug:
+   var: DESIRED_VM_POWER_STATE
