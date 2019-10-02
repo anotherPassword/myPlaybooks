@@ -5,5 +5,4 @@
   tasks:
     - name: Gather all registered virtual machines
        vmware_vm_facts:
-         vm_type: vm
        register: vmfacts
