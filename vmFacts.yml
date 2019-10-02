@@ -4,5 +4,5 @@
   hosts: localhost
   tasks:
     - name: Gather all registered virtual machines
-       vmware_vm_facts:
-       register: vmfacts
+      vmware_vm_facts:
+      register: vmfacts

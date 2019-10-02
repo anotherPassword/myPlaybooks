@@ -4,8 +4,8 @@
   hosts: localhost
   tasks:
     - name: Gather all registered virtual machines
-       vmware_vm_facts: 
-       register: vmfacts
+      #vmware_vm_facts: 
+      #register: vmfacts
     - name: Power On
       vmware_guest_powerstate:
         #feed module information
