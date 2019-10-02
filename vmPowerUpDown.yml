@@ -31,7 +31,7 @@
         validate_certs: no
         folder: "/MSLAB/Ansible"
         name: "{{ VM_NAME }}"
-        state: powered-on
+        state: powered-off
       when: DESIRED_VM_POWER_STATE == 'Off'
     - debug:
         msg: System DESIRED_VM_POWER_STATE has value {{ DESIRED_VM_POWER_STATE }}
