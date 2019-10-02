@@ -6,4 +6,4 @@
         validate_certs: no
       register: instance_vm_facts
 
-- debug: var=instance_vm_facts
+#- debug: var=instance_vm_facts
