@@ -1,6 +1,9 @@
-- name: VM
-  local_action:
-    validate_certs: no
-  register: instance_vm_facts
+- name: VM Facts
+  hosts: localhost
+  tasks:
+    - name: Get all facts all VMs
+      vmware_vm_facts:
+        validate_certs: no
+      register: instance_vm_facts
 
 - debug: var=instance_vm_facts
