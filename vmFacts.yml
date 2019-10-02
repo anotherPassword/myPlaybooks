@@ -1,12 +1,16 @@
 - name: Gather some facts from a guest using the vSphere API output schema
-  vmware_guest_facts:
-    #hostname: "{{ vcenter_hostname }}"
-    #username: "{{ vcenter_username }}"
-    #password: "{{ vcenter_password }}"
-    validate_certs: no
-    datacenter: "{{ 'MSLAB' }}"
-    name: "{{ 'DGSANSBTST01' }}"
-    schema: "vsphere"
-    properties: ["config.hardware.memoryMB", "guest.disk", "overallStatus"]
-  delegate_to: localhost
-  register: facts
+  hosts: localhost
+  tasks:
+    - name: Gater VM Facts
+      vmware_guest_facts:
+        #hostname: "{{ vcenter_hostname }}"
+        #username: "{{ vcenter_username }}"
+        #password: "{{ vcenter_password }}"
+        validate_certs: no
+        datacenter: "{{ 'MSLAB' }}"
+        name: "{{ 'DGSANSBTST01' }}"
+        schema: "vsphere"
+        properties: ["config.hardware.memoryMB", "guest.disk", "overallStatus"]
+        register: facts
+    - debug: 
+      msg: "{{ facts }}"
