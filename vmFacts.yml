@@ -5,5 +5,7 @@
       vmware_vm_facts:
         validate_certs: no
       register: instance_vm_facts
-
-#- debug: var=instance_vm_facts
+    - debug: 
+        var: instance_vm_facts
+        msg: "IP of {{ item.key }} is {{ item.value.ip_address }}"
+      with_dict: "{{ instance_vm_facts.virtual_machines }}"
