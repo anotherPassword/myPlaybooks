@@ -34,4 +34,3 @@
       when: DESIRED_VM_POWER_STATE == 'Off'
     - debug:
         msg: System DESIRED_VM_POWER_STATE has value {{ DESIRED_VM_POWER_STATE }}
-        var: vmfacts.virtual_machines
