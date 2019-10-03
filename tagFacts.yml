@@ -1,0 +1,6 @@
+- name: Get category id from the given tag
+  vmware_tag_facts:
+    validate_certs: no
+  register: tag_details
+- debug:
+    msg: "{{ tag_details.tag_facts['Ansible']['tag_category_id'] }}"
