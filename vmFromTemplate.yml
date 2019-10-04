@@ -13,6 +13,7 @@
     vmtemplate: DGSANSBTPL01
     vmcluster: Mgmt
     notes: Created by Ansible
+    group: group1
     dumpfacts: False
   tasks:
     - name: Check for required variables
