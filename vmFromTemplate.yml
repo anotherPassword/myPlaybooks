@@ -12,7 +12,7 @@
     vmname: ansbt01
     vmtemplate: DGSANSBTPL01
     vmcluster: Mgmt
-    vmFolder: "/Ansible"
+    vmFolder: "/"
     notes: Created by Ansible
     group: group1
     guestID: windows9Server-64
@@ -25,7 +25,13 @@
     #- name: Check for vSphere access parameters
     #  fail: msg="Must set vcenter_user and vcenter_pass in a Vault"
     #  when: (vcenter_user is not defined) or (vcenter_pass is not defined)
-      
+    - name: Find Guest's Folder using name
+      vmware_guest_find:
+        validate_certs: no
+        name: testvm
+      delegate_to: localhost
+      register: vm_folder
+
     - name: Create VM from template
       vmware_guest:
         validate_certs: False
@@ -48,7 +54,7 @@
         wait_for_ip_address: False
         state: present
       register: newvm
-      
-#    - name: IP address info
-#      debug:
-#        msg: "{{ newvm.instance.ipv4 }} {{ name }}"
+
+- name: IP address info
+  debug:
+    msg: "{{ newvm.instance.ipv4 }} {{ name }} "
