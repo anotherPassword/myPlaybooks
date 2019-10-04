@@ -33,13 +33,13 @@
         template: "{{ vmtemplate }}"
         guest_id: "{{ guestID }}"
         disk:
-          - size_gb: 60
-            type: thin
-            datastore: "{{ datastore }}"
+        - size_gb: 60
+          type: thin
+          datastore: "{{ datastore }}"
         networks:
-          - name: "{{ network }}"
-            device_type: vmxnet3 
-            type: dhcp
+        - name: "{{ network }}"
+          device_type: vmxnet3 
+          type: dhcp
         hardware:
           memory_mb: 4096
           num_cpus: 2
