@@ -12,7 +12,7 @@
     vmname: ansbt01
     vmtemplate: DGSANSBTPL01
     vmcluster: Mgmt
-    vmFolder: "/MSLAB/Ansible"
+    vmFolder: "/Ansible"
     notes: Created by Ansible
     group: group1
     guestID: windows9Server-64
