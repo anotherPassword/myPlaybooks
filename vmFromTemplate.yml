@@ -25,7 +25,6 @@
         datacenter: "{{ datacenter }}"
         name: "{{ vmname }}"
         template: "{{ vmtemplate }}"
-        guest_id: "{{ guestID }}"
         disk:
         - size_gb: 60
           type: thin
