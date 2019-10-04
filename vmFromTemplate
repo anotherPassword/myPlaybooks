@@ -40,7 +40,3 @@
         wait_for_ip_address: False
         state: present
       register: newvm
-      
-    - name: IP address info
-      debug:
-        msg: "{{ newvm.instance.ipv4 }} {{ name }}"
