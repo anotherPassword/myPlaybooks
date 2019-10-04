@@ -9,6 +9,7 @@
     esxhost: mslab37.bhcs.pvt
     datastore: Mgmt_005FA_1
     network: "VM Network"
+    vmname: ansbt01
     vmtemplate: DGSANSBTPL01
     vmcluster: Mgmt
     notes: Created by Ansible
@@ -26,7 +27,7 @@
       vmware_guest:
         validate_certs: False
         datacenter: "{{ datacenter }}"
-        name: "{{ ansbt01 }}"
+        name: "{{ vmname }}"
         template: "{{ vmtemplate }}"
         disk:
           - size_gb: 60
