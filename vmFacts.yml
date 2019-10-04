@@ -14,7 +14,7 @@
         folder: "/MSLAB/Ansible" 
         name: "DGSANSBTST01"
         schema: "vsphere"
-    #    properties: ["config.hardware.memoryMB", "guest.disk", "overallStatus"]
-    #    register: facts
-    #- debug: 
-    #    msg: "{{ facts }}"
+        properties: ["config.hardware.memoryMB", "guest.disk", "overallStatus"]
+        register: facts
+    - debug: 
+        msg: "{{ facts }}"
