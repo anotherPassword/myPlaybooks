@@ -47,6 +47,6 @@
         state: present
       register: newvm
       
-    - name: IP address info
-      debug:
-        msg: "{{ newvm.instance.ipv4 }} {{ name }}"
+#    - name: IP address info
+#      debug:
+#        msg: "{{ newvm.instance.ipv4 }} {{ name }}"
