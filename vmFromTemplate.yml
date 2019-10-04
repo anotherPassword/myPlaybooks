@@ -12,6 +12,7 @@
     vmname: ansbt01
     vmtemplate: DGSANSBTPL01
     vmcluster: Mgmt
+    vmFolder: "/MSLAB/Ansible"
     notes: Created by Ansible
     group: group1
     guestID: windows9Server-64
@@ -28,6 +29,7 @@
     - name: Create VM from template
       vmware_guest:
         validate_certs: False
+        folder: "{{ vmFolder }}"
         datacenter: "{{ datacenter }}"
         name: "{{ vmname }}"
         template: "{{ vmtemplate }}"
