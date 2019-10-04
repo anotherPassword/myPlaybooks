@@ -11,10 +11,10 @@
         #password: "{{ vcenter_password }}"
         validate_certs: no
         datacenter: "MSLAB"
-        folder: "/MSLAB/Ansible" 
+        #folder: "/MSLAB/Ansible" 
         name: "DGSANSBTST01"
         schema: "vsphere"
         properties: ["config.hardware.memoryMB", "guest.disk", "overallStatus"]
-        register: facts
+      register: facts
     - debug: 
         msg: "{{ facts }}"
