@@ -14,6 +14,7 @@
     vmcluster: Mgmt
     notes: Created by Ansible
     group: group1
+    guestID: windows9Server-64
     dumpfacts: False
   tasks:
     #- name: Check for required variables
@@ -30,15 +31,18 @@
         datacenter: "{{ datacenter }}"
         name: "{{ vmname }}"
         template: "{{ vmtemplate }}"
+        guest_id: "{{ guestID }}"
         disk:
           - size_gb: 60
             type: thin
             datastore: "{{ datastore }}"
-        nic:
-          - type: vmxnet3
-            network: "{{ network }}"
+        networks:
+          - name: "{{ network }}"
+            device_type: vmxnet3 
+            type: dhcp
         hardware:
-          memory_mb: "{{ vm_memory | default(2048) }}"
+          - memory_mb: 4096
+            num_cpus: 2
         wait_for_ip_address: False
         state: present
       register: newvm
