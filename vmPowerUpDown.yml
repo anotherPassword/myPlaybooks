@@ -22,7 +22,7 @@
         folder: "/MSLAB/Ansible"
         name: "{{ VM_NAME }}"
         state: powered-on
-      when: DESIRED_VM_POWER_STATE == 'On' and "{{ facts['instance']['summary']['runtime']['powerState'] == 'poweredOn' }}"
+      when: DESIRED_VM_POWER_STATE == 'On' and "{{ vmGuestFacts['instance']['summary']['runtime']['powerState'] == 'poweredOn' }}"
  
     - name: Power Off
       vmware_guest_powerstate:
@@ -30,6 +30,6 @@
         folder: "/MSLAB/Ansible"
         name: "{{ VM_NAME }}"
         state: powered-off
-      when: DESIRED_VM_POWER_STATE == 'Off' and "{{ facts['instance']['summary']['runtime']['powerState'] == 'poweredOff' }}"
+      when: DESIRED_VM_POWER_STATE == 'Off' and "{{ vmGuestFacts['instance']['summary']['runtime']['powerState'] == 'poweredOff' }}"
     - debug:
         msg: System DESIRED_VM_POWER_STATE has value {{ DESIRED_VM_POWER_STATE }}
