@@ -2,21 +2,27 @@
 - name: Set powerstate of a virtual machine to poweroff or on
   #run MODULE against localhost
   hosts: localhost
+  vars:
+    datacenter_name: "MSLAB"
+    vm_name: "{{ VM_NAME }}"
+  
   tasks:
+    - name: gater VM facts to determine if power action needed
+      vmware_guest_facts:
+        validate_certs: no
+        datacenter: "{{ datacenter_name }}"
+        name: "{{ VM_NAME }}"
+        schema: "vsphere"
+        properties: ["summary.runtime.powerState"]
+      register: vmGuestFacts
+
     - name: Power On
       vmware_guest_powerstate:
-        #feed module information
-        ####
-        #NOT NEEDED part of credential for vcenter lab
-        #hostname: mslabvc6.bhcs.pvt
-        #username: "{{ vcenter_username }}"
-        #password: "{{ vcenter_password }}"
-        ####
         validate_certs: no
         folder: "/MSLAB/Ansible"
         name: "{{ VM_NAME }}"
         state: powered-on
-      when: DESIRED_VM_POWER_STATE == 'On'
+      when: DESIRED_VM_POWER_STATE == 'On' and "{{ facts['instance']['summary']['runtime']['powerState'] == 'poweredOn' }}"
  
     - name: Power Off
       vmware_guest_powerstate:
@@ -24,6 +30,6 @@
         folder: "/MSLAB/Ansible"
         name: "{{ VM_NAME }}"
         state: powered-off
-      when: DESIRED_VM_POWER_STATE == 'Off'
+      when: DESIRED_VM_POWER_STATE == 'Off' and "{{ facts['instance']['summary']['runtime']['powerState'] == 'poweredOff' }}"
     - debug:
         msg: System DESIRED_VM_POWER_STATE has value {{ DESIRED_VM_POWER_STATE }}
