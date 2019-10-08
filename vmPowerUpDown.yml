@@ -16,7 +16,7 @@
         properties: ["summary.runtime.powerState"]
       register: facts
     #use set_fact to set a variable outside of vars:
-    - set_fact: fPowerState=facts.instance.summary.runtime.powerState
+    - set_fact: fPowerState={{ facts.instance.summary.runtime.powerState }}
 
     - name: Power On
       vmware_guest_powerstate:
