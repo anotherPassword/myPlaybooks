@@ -19,6 +19,8 @@
         var_currentPowerState: "{{ vmGuestFacts['instance']['summary']['runtime']['powerState'] }}"
 
     - name: Power On
+      vars:
+        var_currentPowerState: "{{ vmGuestFacts['instance']['summary']['runtime']['powerState'] }}"
       vmware_guest_powerstate:
         validate_certs: no
         folder: "/MSLAB/Ansible"
