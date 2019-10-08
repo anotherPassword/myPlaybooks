@@ -15,7 +15,8 @@
         schema: "vsphere"
         properties: ["summary.runtime.powerState"]
       register: vmGuestFacts
-    - vars:
+    - name: set variables
+      vars:
         var_currentPowerState: "{{ vmGuestFacts['instance']['summary']['runtime']['powerState'] }}"
     - debug: var=var_currentPowerState
     - name: Power On
