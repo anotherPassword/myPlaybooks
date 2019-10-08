@@ -15,7 +15,7 @@
         schema: "vsphere"
         properties: ["summary.runtime.powerState"]
       register: facts
-      
+    - set_fact: fPowerState={{ facts.instance.summary.runtime.powerState  }}  
     - name: Power On
       vmware_guest_powerstate:
         validate_certs: no
@@ -32,8 +32,8 @@
       register: fact_powerOff
       when: DESIRED_VM_POWER_STATE == 'Off' and facts.instance.summary.runtime.powerState == 'poweredOn'
     
-    - debug: var=fact_powerOn
-      when: fact_powerOn
+    #- debug: var=fact_powerOn
+    #  when: fact_powerOn
 
-    - debug: var=fact_powerOff
-      when: fact_powerOff
+    #- debug: var=fact_powerOff
+    #  when: fact_powerOff
