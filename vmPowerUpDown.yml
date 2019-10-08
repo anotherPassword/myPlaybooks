@@ -19,14 +19,12 @@
         var_currentPowerState: "{{ vmGuestFacts['instance']['summary']['runtime']['powerState'] }}"
 
     - name: Power On
-      vars:
-        var_currentPowerState: "{{ vmGuestFacts['instance']['summary']['runtime']['powerState'] }}"
       vmware_guest_powerstate:
         validate_certs: no
         folder: "/MSLAB/Ansible"
         name: "{{ VM_NAME }}"
         state: powered-on
-      when: DESIRED_VM_POWER_STATE == 'On' and var_currentPowerState == 'poweredOff'
+      when: "{{ DESIRED_VM_POWER_STATE == 'On' and var_currentPowerState == 'poweredOff' }}"
  
     - name: Power Off
       vmware_guest_powerstate:
@@ -34,4 +32,4 @@
         folder: "/MSLAB/Ansible"
         name: "{{ VM_NAME }}"
         state: powered-off
-      when: DESIRED_VM_POWER_STATE == 'Off' and var_currentPowerState == 'poweredOn'
+      when: "{{ DESIRED_VM_POWER_STATE == 'Off' and var_currentPowerState == 'poweredOn' }}"
