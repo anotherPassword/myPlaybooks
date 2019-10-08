@@ -15,22 +15,33 @@
         schema: "vsphere"
         properties: ["summary.runtime.powerState"]
       register: vmGuestFacts
+      msg: VM Power State is "{{ vmGuestFacts['instance']['summary']['runtime']['powerState'] }}"
 
     - name: Power On
       vmware_guest_powerstate:
         validate_certs: no
-        #folder: "/MSLAB/Ansible"
         name: "{{ VM_NAME }}"
         state: powered-on
+      debug: 
+        msg: VM Was powered ON
       when: DESIRED_VM_POWER_STATE == 'On' and "{{ vmGuestFacts['instance']['summary']['runtime']['powerState'] == 'poweredOff' }}"
  
     - name: Power Off
       vmware_guest_powerstate:
         validate_certs: no
-        #folder: "/MSLAB/Ansible"
         name: "{{ VM_NAME }}"
         state: powered-off
+      debug: 
+        msg: VM Was powered OFF
       when: DESIRED_VM_POWER_STATE == 'Off' and "{{ vmGuestFacts['instance']['summary']['runtime']['powerState'] == 'poweredOn' }}"
 
     - debug:
         msg: System DESIRED_VM_POWER_STATE has value {{ DESIRED_VM_POWER_STATE }}
+    
+    - debug:
+        msg: System was on   
+      when: "{{ vmGuestFacts['instance']['summary']['runtime']['powerState'] == 'poweredOn' }}"
+    
+    - debug:
+        msg: System was Off   
+      when: "{{ vmGuestFacts['instance']['summary']['runtime']['powerState'] == 'poweredOff' }}"  
