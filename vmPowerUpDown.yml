@@ -15,7 +15,7 @@
         schema: "vsphere"
         properties: ["summary.runtime.powerState"]
       register: vmGuestFacts
-    - msg: VM Power State is "{{ vmGuestFacts['instance']['summary']['runtime']['powerState'] }}"
+    - msg: VM Power State is 
 
 
     - name: Power On
