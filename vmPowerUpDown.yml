@@ -16,7 +16,7 @@
         properties: ["summary.runtime.powerState"]
       register: vmGuestFacts
       vars:
-        var_powerState: "{{ vmGuestFacts['instance']['summary']['runtime']['powerState'] }}"
+        var_currentPowerState: "{{ vmGuestFacts['instance']['summary']['runtime']['powerState'] }}"
 
     - name: Power On
       vmware_guest_powerstate:
@@ -24,7 +24,7 @@
         folder: "/MSLAB/Ansible"
         name: "{{ VM_NAME }}"
         state: powered-on
-      when: DESIRED_VM_POWER_STATE == 'On' and "{{ vmGuestFacts['instance']['summary']['runtime']['powerState'] == 'poweredOff' }}"
+      when: DESIRED_VM_POWER_STATE == 'On' and var_currentPowerState == 'poweredOff'
  
     - name: Power Off
       vmware_guest_powerstate:
@@ -32,4 +32,4 @@
         folder: "/MSLAB/Ansible"
         name: "{{ VM_NAME }}"
         state: powered-off
-      when: DESIRED_VM_POWER_STATE == 'Off' and "{{ vmGuestFacts['instance']['summary']['runtime']['powerState'] == 'poweredOn' }}"
+      when: DESIRED_VM_POWER_STATE == 'Off' and var_currentPowerState == 'poweredOn'
