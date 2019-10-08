@@ -22,7 +22,7 @@
         validate_certs: no
         name: "{{ VM_NAME }}"
         state: powered-on
-      register: powerOn
+      register: fact_powerOn
       when: DESIRED_VM_POWER_STATE == 'On' and facts.instance.summary.runtime.powerState == 'poweredOff'
  
     - name: Power Off
@@ -30,8 +30,10 @@
         validate_certs: no
         name: "{{ VM_NAME }}"
         state: powered-off
-      register: powerOff
+      register: fact_powerOff
       when: DESIRED_VM_POWER_STATE == 'Off' and facts.instance.summary.runtime.powerState == 'poweredOn'
     
-    - debug: var=powerOn
-    - debut: var=powerOff
+    - debug: var=fact_powerOn
+    - debug: var=fact_powerOff
+
+        #msg: System DESIRED_VM_POWER_STATE has value {{ DESIRED_VM_POWER_STATE }}. facts[0]
