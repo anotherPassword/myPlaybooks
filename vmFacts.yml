@@ -13,4 +13,4 @@
         properties: ["guest.hostName", "guest.toolsVersionStatus","summary.runtime.powerState"]
       register: facts
     - debug: 
-        msg: "{{ facts['guest']['hostName'] }}"
+        msg: "{{ facts['instance']['guest']['hostName'] }}"
