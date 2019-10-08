@@ -10,7 +10,7 @@
         datacenter: "{{ datacenter_name }}"
         name: "{{ vm_name }}"
         schema: "vsphere"
-        #properties: ["config.hardware.memoryMB", "guest.disk", "overallStatus"]
+        properties: ["guest.hostname", "guest.toolsVersionStatus","summary.runtime.powerState"]
       register: facts
     - debug: 
         msg: "{{ facts }}"
