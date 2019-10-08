@@ -5,6 +5,7 @@
   vars:
     datacenter_name: "MSLAB"
     vm_name: "{{ VM_NAME }}"
+    currentPowerState: "Neither"
   tasks:
     - name: gater VM facts to determine if power action needed
       vmware_guest_facts:
@@ -14,6 +15,7 @@
         schema: "vsphere"
         properties: ["summary.runtime.powerState"]
       register: facts
+      currentPowerState: facts.instance.summary.runtime.powerState
       
     - name: Power On
       vmware_guest_powerstate:
