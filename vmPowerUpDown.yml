@@ -31,5 +31,5 @@
         state: powered-off
       when: DESIRED_VM_POWER_STATE == 'Off'
     
-    - debug: var=facts
+    - debug: var=facts.powerState
         #msg: System DESIRED_VM_POWER_STATE has value {{ DESIRED_VM_POWER_STATE }}. facts[0]
