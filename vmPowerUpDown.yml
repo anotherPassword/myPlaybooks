@@ -1,4 +1,4 @@
----
+--
 - name: Set powerstate of a virtual machine to poweroff or on
   #run MODULE against localhost
   hosts: localhost
@@ -15,9 +15,7 @@
         schema: "vsphere"
         properties: ["summary.runtime.powerState"]
       register: vmGuestFacts
-    - name: set variables
-      vars:
-        var_currentPowerState: "{{ vmGuestFacts['instance']['summary']['runtime']['powerState'] }}"
+      var_currentPowerState: "{{ vmGuestFacts['instance']['summary']['runtime']['powerState'] }}"
     - debug: var=var_currentPowerState
     - name: Power On
       vmware_guest_powerstate:
