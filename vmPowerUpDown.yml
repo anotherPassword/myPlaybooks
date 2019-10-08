@@ -22,7 +22,7 @@
         validate_certs: no
         name: "{{ VM_NAME }}"
         state: powered-on
-      retister: powerOn
+      register: powerOn
       when: DESIRED_VM_POWER_STATE == 'On' and facts.instance.summary.runtime.powerState == 'poweredOff'
  
     - name: Power Off
