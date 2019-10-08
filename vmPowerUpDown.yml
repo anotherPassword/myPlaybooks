@@ -15,7 +15,7 @@
         schema: "vsphere"
         properties: ["summary.runtime.powerState"]
       register: vmGuestFacts
-    - debug:
+      debug:
         msg: VM Power State is xxxxxxx
       when: vmGuestFacts['instance']['summary']['runtime']['powerState'] == "poweredOn" or vmGuestFacts['instance']['summary']['runtime']['powerState'] == "poweredOff" 
 
@@ -48,3 +48,4 @@
     - debug:
         msg: System was Off   
       when: "{{ vmGuestFacts['instance']['summary']['runtime']['powerState'] == 'poweredOff' }}"     
+     
