@@ -19,7 +19,7 @@
     - name: Power On
       vmware_guest_powerstate:
         validate_certs: no
-        folder: "/MSLAB/Ansible"
+        #folder: "/MSLAB/Ansible"
         name: "{{ VM_NAME }}"
         state: powered-on
       when: DESIRED_VM_POWER_STATE == 'On' and "{{ vmGuestFacts['instance']['summary']['runtime']['powerState'] == 'poweredOff' }}"
@@ -27,7 +27,7 @@
     - name: Power Off
       vmware_guest_powerstate:
         validate_certs: no
-        folder: "/MSLAB/Ansible"
+        #folder: "/MSLAB/Ansible"
         name: "{{ VM_NAME }}"
         state: powered-off
       when: DESIRED_VM_POWER_STATE == 'Off' and "{{ vmGuestFacts['instance']['summary']['runtime']['powerState'] == 'poweredOn' }}"
