@@ -12,7 +12,7 @@
         datacenter: "{{ datacenter_name }}"
         name: "{{ VM_NAME }}"
         schema: "vsphere"
-        properties: ["guest.hostName", "guest.toolsVersionStatus","summary.runtime.powerState"]
+        properties: ["summary.runtime.powerState"]
       register: facts
       
     - name: Power On
@@ -30,5 +30,6 @@
         name: "{{ VM_NAME }}"
         state: powered-off
       when: DESIRED_VM_POWER_STATE == 'Off'
-    - debug:
-        msg: System DESIRED_VM_POWER_STATE has value {{ DESIRED_VM_POWER_STATE }}
+    
+    - debug: var=facts
+        #msg: System DESIRED_VM_POWER_STATE has value {{ DESIRED_VM_POWER_STATE }}. facts[0]
