@@ -5,7 +5,6 @@
   vars:
     datacenter_name: "MSLAB"
     vm_name: "{{ VM_NAME }}"
-  
   tasks:
     - name: gater VM facts to determine if power action needed
       vmware_guest_facts:
@@ -13,16 +12,16 @@
         datacenter: "{{ datacenter_name }}"
         name: "{{ VM_NAME }}"
         schema: "vsphere"
-        properties: ["summary.runtime.powerState"]
-      register: vmGuestFacts
-
+        properties: ["guest.hostName", "guest.toolsVersionStatus","summary.runtime.powerState"]
+      register: facts
+      
     - name: Power On
       vmware_guest_powerstate:
         validate_certs: no
         folder: "/MSLAB/Ansible"
         name: "{{ VM_NAME }}"
         state: powered-on
-      when: "{{ DESIRED_VM_POWER_STATE == 'On' and var_currentPowerState == 'poweredOff' }}"
+      when: DESIRED_VM_POWER_STATE == 'On'
  
     - name: Power Off
       vmware_guest_powerstate:
@@ -30,4 +29,6 @@
         folder: "/MSLAB/Ansible"
         name: "{{ VM_NAME }}"
         state: powered-off
-      when: "{{ DESIRED_VM_POWER_STATE == 'Off' and var_currentPowerState == 'poweredOn' }}"
+      when: DESIRED_VM_POWER_STATE == 'Off'
+    - debug:
+        msg: System DESIRED_VM_POWER_STATE has value {{ DESIRED_VM_POWER_STATE }}
