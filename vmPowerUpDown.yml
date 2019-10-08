@@ -17,7 +17,7 @@
       register: vmGuestFacts
       vars:
         var_currentPowerState: "{{ vmGuestFacts['instance']['summary']['runtime']['powerState'] }}"
-
+    - debug: var=var_currentPowerState
     - name: Power On
       vmware_guest_powerstate:
         validate_certs: no
