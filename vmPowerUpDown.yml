@@ -35,9 +35,9 @@
       when: DESIRED_VM_POWER_STATE == 'Off' and fPowerState == 'poweredOn'
     
     - debug: var=fact_powerOn
-      when: fact_powerOn|bool == true #use this to eval true/false
+      #when: fact_powerOn|bool == true #use this to eval true/false
 
     - debug: var=fact_powerOff
-      when: fact_powerOff|bool == true #use this to eval true/false
+      #when: fact_powerOff|bool == true #use this to eval true/false
 
     - debug: var=fPowerState
