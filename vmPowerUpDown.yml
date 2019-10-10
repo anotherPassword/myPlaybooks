@@ -28,9 +28,12 @@
         name: "{{ VM_NAME }}"
         state: powered-on
       register: fact_powerOn
-      set_fact:
+      when: DESIRED_VM_POWER_STATE == 'On' and fPowerState == 'poweredOff'      
+      
+    - set_fact:
         fact_fact_powerOn_json: "{{fact_powerOn | to_json}}"
       when: DESIRED_VM_POWER_STATE == 'On' and fPowerState == 'poweredOff'
+    
     - name: "Powered on JSON"
       debug:
         msg: fact_fact_powerOn_json
