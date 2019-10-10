@@ -19,7 +19,8 @@
     #use set_fact to set a variable outside of vars:
     - name: Set powerstate fact
       set_fact: fPowerState={{ facts.instance.summary.runtime.powerState }}
-      msg: 'Current power state is --> {{fPowerState}}'
+      debug: 
+        msg: 'Current power state is --> {{fPowerState}}'
     
     - name: 'Power On VM when it is off'
       vmware_guest_powerstate:
