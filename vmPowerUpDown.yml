@@ -48,9 +48,9 @@
     - name: 'VM power state changed. Result from set VM Power State'
       debug:  
         msg: "{{ result_json }}"
-      when: result_json|bool == true
+      when: result_json is defined
     
     - name: 'NO CHANGE TO POWER STATE'
       debug:  
         msg: "{{ result_json }}"
-      when: result_json|bool == false     
+      when: result_json is not defined  
