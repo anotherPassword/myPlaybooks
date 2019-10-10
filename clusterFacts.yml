@@ -16,8 +16,12 @@
     register: clusterFacts
   - set_fact: 
       factsToJSON: "{{clusterFacts | to_json}}"
+      datastoreName: clusterFacts.datastores.datastore_cluster
   - name: "Facts to JSON"
     debug: 
       msg: "{{factsToJSON}}"
   - name: "clusterFacts full"
     debug: var=clusterFacts
+  - name: "clusterFacts"
+    debug: 
+      msg: "{{datastoreName}}"
