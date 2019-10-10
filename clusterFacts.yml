@@ -1,0 +1,11 @@
+#get facts about a vmware cluster
+- name: Gather facts from standalone ESXi server having datacenter as 'ha-datacenter'
+  vmware_datastore_facts:
+    #datacenter_name: 'MSLAB'
+    cluster: Mgmt
+    validate_certs: no
+  delegate_to: localhost
+  register: clusterFacts
+- Name: "Facts to JSON"
+  debug: 
+    msg: "{{clusterFacts| to_json}}"
