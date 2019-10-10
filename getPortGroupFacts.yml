@@ -1,0 +1,12 @@
+---
+- name: 'Gater datastore facts on vmware cluster'
+  #run MODULE against localhost
+  hosts: localhost
+ 
+  tasks:
+  - name: Gather portgroup facts about ESXi Host system
+    vmware_portgroup_facts:
+      esxi_hostname: "ntxmdh154.bhcs.pvt"
+    register: portFacts
+  - name: "portgroup facts"
+    debug: var=portFacts
