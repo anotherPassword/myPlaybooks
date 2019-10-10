@@ -27,10 +27,10 @@
           validate_certs: no
           name: "{{ VM_NAME }}"
           state: powered-on
-        register: fact_powerOn
+        register: powerFact
         
       - set_fact:
-          result_json: "{{fact_powerOn | to_json}}"
+          result_json: "{{powerFact | to_json}}"
       when: DESIRED_VM_POWER_STATE == 'On' and fPowerState == 'poweredOff'
     
     - block: 
@@ -39,10 +39,10 @@
           validate_certs: no
           name: "{{ VM_NAME }}"
           state: powered-off
-        register: fact_powerOff
+        register: powerFact
          
       - set_fact:
-          result_json: "{{fact_powerOn | to_json}}"       
+          result_json: "{{powerFact | to_json}}"       
       when: DESIRED_VM_POWER_STATE == 'Off' and fPowerState == 'poweredOn'
     
     - name: 'Result from set VM Power State'
