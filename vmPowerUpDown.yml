@@ -53,4 +53,4 @@
     - name: 'NO CHANGE TO POWER STATE'
       debug:  
         msg: "{{ result_json }}"
-      when: result_json|bool == true      
+      when: result_json|bool == false     
