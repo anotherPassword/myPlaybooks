@@ -53,4 +53,4 @@
     - name: 'NO CHANGE TO POWER STATE'
       debug:  
         msg: "{{ result_jsonOFF }}"
-      when: result_jsonOFF is defined  
+      when: result_jsonOFF is not defined  and result_jsonON is not defined  
