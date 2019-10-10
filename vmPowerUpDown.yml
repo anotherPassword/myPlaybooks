@@ -28,8 +28,13 @@
         name: "{{ VM_NAME }}"
         state: powered-on
       register: fact_powerOn
+      set_fact:
+        fact_fact_powerOn_json: "{{fact_powerOn | to_json}}"
       when: DESIRED_VM_POWER_STATE == 'On' and fPowerState == 'poweredOff'
- 
+    - name: "Powered on JSON"
+      debug:
+        msg: fact_fact_powerOn_json
+
     - name: 'Power Off VM when it is on'
       vmware_guest_powerstate:
         validate_certs: no
@@ -39,6 +44,7 @@
       when: DESIRED_VM_POWER_STATE == 'Off' and fPowerState == 'poweredOn'
     
     - name: 'Power on debug'
+      #{{ jsonData|map('string')|list|tojson }} 
       debug: #var=fact_powerOn
         msg: This is the powered on debug --> {{ fact_powerOn }}
       when: fact_powerOn.changed|bool == true #use this to eval true/false
