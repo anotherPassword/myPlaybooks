@@ -47,4 +47,4 @@
     
     - name: 'Result from set VM Power State'
       debug:  
-        msg: 'This is the powered off debug --> "{{ result_json }}"'
+        msg: "{{ result_json }}"
