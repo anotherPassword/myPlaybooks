@@ -18,4 +18,4 @@
       factsToJSON: "{{clusterFacts| to_json}}" 
   - name: "Facts to JSON"
     debug: 
-      msg: factsToJSON
+      msg: "{{factsToJSON}}"
