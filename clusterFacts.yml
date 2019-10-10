@@ -14,6 +14,8 @@
       cluster: Mgmt
       validate_certs: no
     register: clusterFacts
+  - set_fact: 
+    factsToJSON: "{{clusterFacts| to_json}}" 
   - name: "Facts to JSON"
     debug: 
-      msg: "{{clusterFacts| to_json}}"
+      msg: factsToJSON
