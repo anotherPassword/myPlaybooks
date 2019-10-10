@@ -15,9 +15,12 @@
         schema: "vsphere"
         properties: ["summary.runtime.powerState"]
       register: facts
-    #use set_fact to set a variable outside of vars:
-    - set_fact: fPowerState={{ facts.instance.summary.runtime.powerState }}
 
+    #use set_fact to set a variable outside of vars:
+    - name: Set powerstate fact
+      set_fact: fPowerState={{ facts.instance.summary.runtime.powerState }}
+      msg: 'Current power state is --> {{fPowerState}}'
+    
     - name: 'Power On VM when it is off'
       vmware_guest_powerstate:
         validate_certs: no
@@ -39,11 +42,7 @@
         msg: This is the powered on debug --> {{ fact_powerOn }}
       when: fact_powerOn.changed|bool == true #use this to eval true/false
     
-    - name: 'Power on debug'
+    - name: 'Power off debug'
       debug: #var=fact_powerOff
         msg: This is the powered off debug --> {{ fact_powerOff }}
       when: fact_powerOff.changed|bool == true #use this to eval true/false
-    
-    - name: 'Power state debug'
-      debug: #var=fPowerState
-        msg: This is the powerstate debug --> {{ fPowerState }}
