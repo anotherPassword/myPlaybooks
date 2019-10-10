@@ -36,7 +36,7 @@
     
     - name: "Powered on JSON"
       debug:
-        msg: fact_fact_powerOn_json
+        msg: "{{fact_fact_powerOn_json}}"
 
     - name: 'Power Off VM when it is on'
       vmware_guest_powerstate:
