@@ -5,6 +5,7 @@
   vars:
     datacenter_name: "MSLAB"
     vm_name: "{{ VM_NAME }}"
+    result_JSON: 'false'
  
   tasks:
     - name: 'gater VM facts to determine if power action needed'
@@ -28,9 +29,7 @@
           name: "{{ VM_NAME }}"
           state: powered-on
         register: powerFact
-        
-      - set_fact:
-          result_jsonON: "{{powerFact | to_json}}"
+        result_JSON: "{{powerFact | to_json}}"
       when: DESIRED_VM_POWER_STATE == 'On' and fPowerState == 'poweredOff'
     
     - block: 
@@ -40,17 +39,15 @@
           name: "{{ VM_NAME }}"
           state: powered-off
         register: powerFact
-         
-      - set_fact:
-          result_jsonOFF: "{{powerFact | to_json}}"       
+        result_JSON: "{{powerFact | to_json}}"       
       when: DESIRED_VM_POWER_STATE == 'Off' and fPowerState == 'poweredOn'
     
     - name: 'VM power state changed. Result from set VM Power State'
       debug:  
-        msg: "{{ result_jsonON }}"
-      when: result_jsonON is defined
+        msg: "{{ result_JSON}}"
+      when: result_JSON |bool != false
     
     - name: 'NO CHANGE TO POWER STATE'
       debug:  
         msg: "{{ result_jsonOFF }}"
-      when: result_jsonOFF is not defined  and result_jsonON is not defined  
+      when: result_JSON |bool == false
