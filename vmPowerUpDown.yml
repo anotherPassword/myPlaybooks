@@ -36,14 +36,14 @@
     
     - name: 'Power on debug'
       debug: #var=fact_powerOn
-        msg: This is the powered on debug {{ fact_powerOn }}
+        msg: This is the powered on debug --> {{ fact_powerOn }}
       when: fact_powerOn.changed|bool == true #use this to eval true/false
     
     - name: 'Power on debug'
       debug: #var=fact_powerOff
-        msg: This is the powered off debug {{ fact_powerOff }}
+        msg: This is the powered off debug --> {{ fact_powerOff }}
       when: fact_powerOff.changed|bool == true #use this to eval true/false
     
     - name: 'Power state debug'
       debug: #var=fPowerState
-        msg: This is the powerstate debug {{ fPowerState }}
+        msg: This is the powerstate debug --> {{ fPowerState }}
