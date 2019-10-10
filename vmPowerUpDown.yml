@@ -1,5 +1,5 @@
 ---
-- name: Set powerstate of a virtual machine to poweroff or on
+- name: 'Set powerstate of a virtual machine to poweroff or on'
   #run MODULE against localhost
   hosts: localhost
   vars:
@@ -7,7 +7,7 @@
     vm_name: "{{ VM_NAME }}"
  
   tasks:
-    - name: gater VM facts to determine if power action needed
+    - name: 'gater VM facts to determine if power action needed'
       vmware_guest_facts:
         validate_certs: no
         datacenter: "{{ datacenter_name }}"
@@ -18,7 +18,7 @@
     #use set_fact to set a variable outside of vars:
     - set_fact: fPowerState={{ facts.instance.summary.runtime.powerState }}
 
-    - name: Power On VM when it is off
+    - name: 'Power On VM when it is off'
       vmware_guest_powerstate:
         validate_certs: no
         name: "{{ VM_NAME }}"
@@ -26,7 +26,7 @@
       register: fact_powerOn
       when: DESIRED_VM_POWER_STATE == 'On' and fPowerState == 'poweredOff'
  
-    - name: Power Off VM when it is on
+    - name: 'Power Off VM when it is on'
       vmware_guest_powerstate:
         validate_certs: no
         name: "{{ VM_NAME }}"
@@ -34,13 +34,15 @@
       register: fact_powerOff
       when: DESIRED_VM_POWER_STATE == 'Off' and fPowerState == 'poweredOn'
     
-    - debug: var=fact_powerOn
+    - name: 'Power on debug'
+      debug: var=fact_powerOn
       msg: This is the powered on debug
       when: fact_powerOn.changed|bool == true #use this to eval true/false
-
-    - debug: var=fact_powerOff
+    
+    - name: 'Power on debug'
+      debug: var=fact_powerOff
       msg: This is the powered off debug
       when: fact_powerOff.changed|bool == true #use this to eval true/false
-
-    - debug: var=fPowerState
+    - name: 'Power state debug'
+      debug: var=fPowerState
       msg: This is the powerstate debug
