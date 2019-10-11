@@ -9,7 +9,7 @@
     lspciredhat: "allofyou"
   tasks:
   - name: copy content
-    local_action: copy content="{{ item.value }}" dest="{{ playbook_dir }}/testFile"
+    local_action: copy content="{{ item.value }}" dest="{{ playbook_dir }}/testFile.yml"
     with_items:
       - variable: lspcideb
         value: "{{ lspcideb }}"
