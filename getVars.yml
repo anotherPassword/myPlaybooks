@@ -9,4 +9,5 @@
 
   - name: "dump vars"
     include_vars: testFile.yml
+  - name: "debug" 
     debug: msg="the value of testFile.yml is {{lookup('file', 'testFile.yml') }}"
