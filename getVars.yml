@@ -4,7 +4,9 @@
 - name: 'get vars'
   #run MODULE against localhost
   hosts: localhost
-  include_vars: testFile.yml
+ 
   tasks:
+
   - name: "dump vars"
+    include_vars: testFile.yml
     debug: msg="the value of testFile.yml is {{lookup('file', 'testFile.yml') }}"
