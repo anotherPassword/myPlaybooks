@@ -9,7 +9,7 @@
     lspciredhat: "allofyou"
   tasks:
   - name: copy content
-       local_action: copy content="{{ item.value }}" dest=test.txt
+       local_action: copy content="{{ item.value }}" dest="test.txt"
     with_items:
       - variable: lspcideb
         value: "{{ lspcideb }}"
