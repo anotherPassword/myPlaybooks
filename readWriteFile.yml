@@ -14,4 +14,4 @@
       content: "{{ my_var | to_nice_json }}" 
       dest: "{{ playbook_dir }}/testFile.yml"  
   - debug:
-      var: my_var
+      var: my_var.serverName
