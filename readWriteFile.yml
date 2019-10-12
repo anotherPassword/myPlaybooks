@@ -1,0 +1,17 @@
+#read/write JSON
+---
+- hosts: localhost
+#dest="{{ playbook_dir }}/testFile.yml"
+
+  vars:
+    my_var:
+      serverName: BSWDGSANSBT02
+      os: Windows
+
+  tasks:
+  - name: write var to file
+    copy: 
+      content: "{{ my_var | to_nice_json }}" 
+      dest: "{{ playbook_dir }}/testFile.yml"  
+  - debug:
+      var: my_var
