@@ -22,8 +22,8 @@
   - name: 'Show Loaded Vars'
     debug: var=imported_vars
   #change value of existing vars
-  - name: 'Set Fact'
-  - set_fact:
+  - name: 'change serverName'
+    set_fact:
       topLevelVars: '{ "serverName": wasBSWDGSANSBT02, "os": "{{ topLevelVars.osVersion }}" }' 
   #append to var
   - name: 'append more key/values'
