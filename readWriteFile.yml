@@ -23,7 +23,8 @@
     debug: var=imported_vars
   #change value of existing vars
   - name: 'change value of existing key (actually an overwrite)'
-    set_fact: "{{ topLevelVars | 'serverName' : 'newservername' }}"
+    set_fact:
+      topLevelVars: "{{ topLevelVars | 'serverName' : 'newservername' }}"
 
   #add a key/value pair
   - name: 'add key/value'
