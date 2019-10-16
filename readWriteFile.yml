@@ -24,7 +24,7 @@
   #change value of existing vars
   - name: 'change value of existing key (actually an overwrite)'
     set_fact:
-      topLevelVars: "{{ topLevelVars | default([]) | combine({ 'serverName': 'newServerName }) }}"
+      topLevelVars: "{ '{{ serverName }}' : '{{ newServerName }}' }"
 
   #add a key/value pair
   - name: 'add key/value'
