@@ -1,7 +1,7 @@
 #read/write JSON
 ---
 - hosts: localhost
-#dest="{{ playbook_dir }}/testFile.yml"
+  #dest="{{ playbook_dir }}/testFile.yml"
   vars:
     topLevelVars:
       serverName: 'BSWDGSANSBT02'
@@ -22,16 +22,14 @@
   - name: 'Show Loaded Vars'
     debug: var=imported_vars
   #change value of existing vars
-  #- name: 'change serverName'
-  #  set_fact:
-  #    topLevelVars: "{{ "
-  #  set_fact:
-  #    topLevelVars: '{ "serverName": wasBSWDGSANSBT02, "os": LEENUX }' 
-  #append to var
-  - name: 'append more key/values'
+  - name: 'change value of existing key (actually an overwrite)'
+    set_fact: "{{ topLevelVars | 'serverName' : 'newservername' }}"
+
+  #add a key/value pair
+  - name: 'add key/value'
     set_fact:
       topLevelVars: "{{ topLevelVars | default([]) | combine({ 'hello': 'world' }) }}"
-#write vars
+  #write vars
   - name: 'write vars to file again'
     copy: 
       content: "{{ topLevelVars | to_nice_json }}" 
