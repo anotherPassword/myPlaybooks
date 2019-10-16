@@ -2,16 +2,39 @@
 ---
 - hosts: localhost
 #dest="{{ playbook_dir }}/testFile.yml"
-
   vars:
-    my_var:
+    topLevelVars:
       serverName: BSWDGSANSBT02
       os: Windows
-
+      osVersion: "Windows 2016"
   tasks:
-  - name: write var to file
+  #write vars
+  - name: write vars to file
     copy: 
-      content: "{{ my_var | to_nice_json }}" 
-      dest: "{{ playbook_dir }}/testFile.yml"  
-  - debug:
-      var: my_var.serverName
+      content: "{{ topLevelVars | to_nice_json }}" 
+      dest: "{{ playbook_dir }}/testFile1.yml" 
+  #load vars from file
+  - name: 'Load vars from file'
+    include_vars:
+      file: "{{ playbook_dir }}/testFile1.yml"
+      name: imported_vars
+  #show var var values 
+  - name: 'Show Loaded Vars'
+    debug: var=imported_vars
+  #change value of existing vars
+  - name: 'Set Fact'
+  - set_fact:
+      topLevelVars: '{ "serverName": wasBSWDGSANSBT02, "os": "{{ topLevelVars.osVersion }}" }' 
+  #append to var
+  - name: 'append more key/values'
+    set_fact:
+      imported_var: "{{ imported_vars | default([]) | combine({ 'hello': 'world' }) }}"
+
+  #load vars from file
+  - name: 'load var from file again'
+    include_vars:
+      file: "{{ playbook_dir }}/testFile1.yml"
+      name: imported_varsChanged
+  #show var var values 
+  - name: 'dump changed vars'
+    debug: var=imported_varsChanged
