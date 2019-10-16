@@ -26,9 +26,9 @@
     set_fact:
       topLevelVars: '{ "serverName": wasBSWDGSANSBT02, "os": LEENUX }' 
   #append to var
-  - name: 'append more key/values'
-    set_fact:
-      topLevelVars: "{{ topLevelVars | default([]) | combine({ 'hello': 'world' }) }}"
+  #- name: 'append more key/values'
+  #  set_fact:
+  #    topLevelVars: "{{ topLevelVars | default([]) | combine({ 'hello': 'world' }) }}"
 #write vars
   - name: 'write vars to file again'
     copy: 
