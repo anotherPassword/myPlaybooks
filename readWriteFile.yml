@@ -9,13 +9,13 @@
       osVersion: "Windows 2016"
   tasks:
   #write vars
-  - name: write vars to file
+  - name: 'write vars to file'
     copy: 
       content: "{{ topLevelVars | to_nice_json }}" 
       dest: "{{ playbook_dir }}/testFile1.yml" 
   #load vars from file
   - name: 'Load vars from file'
-    include_vars:
+    include_vars: ##### here #######
       file: "{{ playbook_dir }}/testFile1.yml"
       name: imported_vars
   #show var var values 
@@ -24,12 +24,16 @@
   #change value of existing vars
   - name: 'change serverName'
     set_fact:
-      topLevelVars: '{ "serverName": wasBSWDGSANSBT02, "os": "{{ topLevelVars.osVersion }}" }' 
+      topLevelVars: '{ "serverName": wasBSWDGSANSBT02, "os": LEENUX }' 
   #append to var
   - name: 'append more key/values'
     set_fact:
-      imported_var: "{{ imported_vars | default([]) | combine({ 'hello': 'world' }) }}"
-
+      topLevelVars: "{{ topLevelVars | default([]) | combine({ 'hello': 'world' }) }}"
+#write vars
+  - name: 'write vars to file again'
+    copy: 
+      content: "{{ topLevelVars | to_nice_json }}" 
+      dest: "{{ playbook_dir }}/testFile1.yml" 
   #load vars from file
   - name: 'load var from file again'
     include_vars:
