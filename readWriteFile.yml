@@ -4,9 +4,9 @@
 #dest="{{ playbook_dir }}/testFile.yml"
   vars:
     topLevelVars:
-      serverName: BSWDGSANSBT02
-      os: Windows
-      osVersion: "Windows 2016"
+      serverName: 'BSWDGSANSBT02'
+      os: 'Windows'
+      osVersion: 'Windows 2016'
   tasks:
   #write vars
   - name: 'write vars to file'
@@ -24,11 +24,13 @@
   #change value of existing vars
   - name: 'change serverName'
     set_fact:
-      topLevelVars: '{ "serverName": wasBSWDGSANSBT02, "os": LEENUX }' 
-  #append to var
-  #- name: 'append more key/values'
+      topLevelVars: "{{ "
   #  set_fact:
-  #    topLevelVars: "{{ topLevelVars | default([]) | combine({ 'hello': 'world' }) }}"
+  #    topLevelVars: '{ "serverName": wasBSWDGSANSBT02, "os": LEENUX }' 
+  #append to var
+  - name: 'append more key/values'
+    set_fact:
+      topLevelVars: "{{ topLevelVars | default([]) | combine({ 'hello': 'world' }) }}"
 #write vars
   - name: 'write vars to file again'
     copy: 
