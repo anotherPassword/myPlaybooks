@@ -25,3 +25,6 @@
     win_command: powershell.exe -
     args:
       stdin: Write-Host test
+    register: result
+  - debug:
+      msg: "{{ result }}" 
