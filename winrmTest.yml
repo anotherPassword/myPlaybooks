@@ -31,7 +31,6 @@
   
   - name: Get disk facts
     win_disk_facts:
-
+    register: windisk
   - name: Output first disk size
-    debug:
-      var: ansible_facts.disks[0].size
+    debug: var=windisk
