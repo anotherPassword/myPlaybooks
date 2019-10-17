@@ -3,10 +3,10 @@
 - name: Check winrm
   hosts: all
   vars:
-      var1: 'varOne'
-      var2: 'varTwo'
-      var3: 'varThree'  
+      var1: 'abc'
+      var2: 'def'
+      var3: 'ghi'  
   tasks:
   
   - name: "Run script 'outputValues.ps1'"
-    win_shell: C:\scripts\outputValues.ps1 -value01 "{{ var1 }}"
+    win_shell: C:\scripts\outputValues.ps1 -value01 "{{ var1 var2 }}"
