@@ -1,0 +1,12 @@
+---
+- name: Check winrm
+  hosts: all
+    
+  tasks:
+  
+  - name: Check winrm is Installed
+    win_service:
+     name: winRM
+    register: winrmstatus
+  - debug:
+      msg: "{{ winrmstatus }}" 
