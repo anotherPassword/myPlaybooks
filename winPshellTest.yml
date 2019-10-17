@@ -1,3 +1,4 @@
+#winpshell test
 ---
 - name: Check winrm
   hosts: all
@@ -7,8 +8,7 @@
       var3: 'varThree'  
   tasks:
   
-  - name: Check winrm is Installed
+  - name: "Run script 'outputValues.ps1'"
     win_shell: C:\scripts\outputValues.ps1
-    args:
-      stdin: "{{ var1 }}\n
-        {{ var2 }}"
+    args: 
+      stdin: "{{ var1 }}"
