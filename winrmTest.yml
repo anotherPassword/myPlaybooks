@@ -28,3 +28,10 @@
     register: result
   - debug:
       msg: "{{ result }}" 
+  
+  - name: Get disk facts
+    win_disk_facts:
+
+  - name: Output first disk size
+    debug:
+      var: ansible_facts.disks[0].size
