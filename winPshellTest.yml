@@ -9,4 +9,4 @@
   tasks:
   
   - name: "Run script 'outputValues.ps1'"
-    win_shell: C:\scripts\outputValues.ps1 -value01 "{{ var1 var2 }}"
+    win_shell: C:\scripts\outputValues.ps1 -value01 "{{ var1 }}" "{{var2 }}"
