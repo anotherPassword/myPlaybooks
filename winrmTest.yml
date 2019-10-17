@@ -10,17 +10,17 @@
     register: winrmstatus
   - debug:
       msg: "{{ winrmstatus }}" 
-- name: Save the result of 'whoami' in 'whoami_out'
-  win_command: whoami
-  register: whoami_out
+  - name: Save the result of 'whoami' in 'whoami_out'
+    win_command: whoami
+    register: whoami_out
 
-- name: Run command that only runs if folder exists and runs from a specific folder
-  win_command: wbadmin -backupTarget:C:\backup\
-  args:
-    chdir: C:\somedir\
-    creates: C:\backup\
+  - name: Run command that only runs if folder exists and runs from a specific folder
+    win_command: wbadmin -backupTarget:C:\backup\
+    args:
+      chdir: C:\somedir\
+      creates: C:\backup\
 
-- name: Run an executable and send data to the stdin for the executable
-  win_command: powershell.exe -
-  args:
-    stdin: Write-Host test
+  - name: Run an executable and send data to the stdin for the executable
+    win_command: powershell.exe -
+    args:
+      stdin: Write-Host test
