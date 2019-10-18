@@ -14,4 +14,4 @@
     win_shell: C:\scripts\outputValues.ps1 -value01 "{{ var1  }}"
   
   - name: "Run script 'outputValues.ps1'"
-    win_shell: C:\scripts\outputValues.ps1 -value01 "{{ varArray.val1  }}"
+    win_shell: C:\scripts\outputValues.ps1 -value01 varArray
