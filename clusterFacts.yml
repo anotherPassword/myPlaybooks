@@ -7,7 +7,7 @@
     result_JSON: 'false'
  
   tasks:
-  - name: "Get Datastore Facts"
+  - name: "Get Cluster Facts"
     vmware_datastore_facts:
       #datacenter_name: 'NTXMD'
       cluster: MD_CL11_GEN_POP_NONPROD
@@ -17,7 +17,7 @@
       factsToJSON: "{{clusterFacts | to_json}}"
       #datastoreName: "{{clusterFacts.datastores[0].datastore_cluster}}"
       #tags: "{{clusterFacts.datastores[0].datastore_cluster}}"
-  - name: "Facts to JSON"
+  - name: "Cluster Facts to JSON"
     debug: 
       msg: "{{factsToJSON}}"
   #- name: "clusterFacts full"
