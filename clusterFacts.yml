@@ -4,24 +4,24 @@
   hosts: localhost
   vars:
     datacenter_name: "NTXMD"
-    vm_name: "{{ VM_NAME }}"
     result_JSON: 'false'
  
   tasks:
   - name: "Get Datastore Facts"
     vmware_datastore_facts:
-      datacenter_name: 'NTXMD'
-      #cluster: MD_CL11_GEN_POP_NONPROD
+      #datacenter_name: 'NTXMD'
+      cluster: MD_CL11_GEN_POP_NONPROD
       validate_certs: no
     register: clusterFacts
   - set_fact: 
       factsToJSON: "{{clusterFacts | to_json}}"
-      datastoreName: "{{clusterFacts.datastores[0].datastore_cluster}}"
+      #datastoreName: "{{clusterFacts.datastores[0].datastore_cluster}}"
+      #tags: "{{clusterFacts.datastores[0].datastore_cluster}}"
   - name: "Facts to JSON"
     debug: 
       msg: "{{factsToJSON}}"
-  - name: "clusterFacts full"
-    debug: var=clusterFacts
-  - name: "clusterFacts"
-    debug: 
-      msg: "{{datastoreName}}"
+  #- name: "clusterFacts full"
+  #  debug: var=clusterFacts
+  #- name: "clusterFacts"
+  #  debug: 
+  #    msg: "{{datastoreName}}"
