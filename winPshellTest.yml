@@ -13,6 +13,6 @@
   #- name: "Run script 'outputValues.ps1'"
   #  win_shell: C:\scripts\outputValues.ps1 -value01 "{{ var1  }}"
   - set_fact: 
-    factsToJSON: "{{varArray | to_json}}"
+      factsToJSON: "{{varArray | to_json}}"
   - name: "Run script 'outputValues.ps1'"
     win_shell: D:\scripts\outputValues.ps1 -value01 "{{ factsToJSON }}""
