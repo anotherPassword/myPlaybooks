@@ -10,7 +10,7 @@
   tasks:
   - name: "Get Datastore Facts"
     vmware_datastore_facts:
-      datacenter_name: 'MSLAB'
+      datacenter_name: 'NTXMD'
       #cluster: MD_CL11_GEN_POP_NONPROD
       validate_certs: no
     register: clusterFacts
