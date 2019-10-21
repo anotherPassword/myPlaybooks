@@ -10,8 +10,8 @@
       val2: 'element2'
   tasks:
   #this works
-  - name: "Run script 'outputValues.ps1'"
-    win_shell: C:\scripts\outputValues.ps1 -value01 "{{ var1  }}"
+  #- name: "Run script 'outputValues.ps1'"
+  #  win_shell: C:\scripts\outputValues.ps1 -value01 "{{ var1  }}"
   
   - name: "Run script 'outputValues.ps1'"
-    win_shell: C:\scripts\outputValues.ps1 -value01 varArray
+    win_shell: D:\scripts\outputValues.ps1 -value01 "{{ vars }}""
