@@ -1,0 +1,21 @@
+#variables test
+- hosts: all
+  connection: local
+  vars:
+    servers:
+      - name: foo
+        port: 1000
+      - name: bar
+        port: 2000
+  tasks:
+    - set_fact:
+        result_item: '{{ item.name }}-{{ item.port }}'
+      with_items:
+        - '{{ servers }}'
+      register: result_list
+
+    - set_fact:
+        result: '{{ result_list.results | map(attribute="ansible_facts.result_item") | join(",") }}'
+
+    - debug:
+        var: result
