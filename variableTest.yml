@@ -3,10 +3,8 @@
   connection: local
   vars:
     servers:
-      - name: foo
-        port: 1000
-      - name: bar
-        port: 2000
+      name: foo
+      port: 1000
   tasks:
     - set_fact:
         #result_item: '{{ item.name }}-{{ item.port }}'
