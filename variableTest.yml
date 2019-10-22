@@ -9,8 +9,9 @@
         port: 2000
   tasks:
     - set_fact:
-        result_item: '{{ item.name }}-{{ item.port }}'
-      with_items:
+        #result_item: '{{ item.name }}-{{ item.port }}'
+        result_item: '{{ item.key }}-{{ item.value }}'
+      with_dict:
         - '{{ servers }}'
       register: result_list
 
