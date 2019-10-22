@@ -2,15 +2,20 @@
 - hosts: all
   connection: local
   vars:
-    servers:
-      name: foo
-      port: 1000
+    surveyVars:
+      vmName: BSWANSBVMT01
+      os: "Windows_Server_2016"
+      application: "Gen-pop"
+      tier: "1"
+      environment: "Non-Prod"
+      location: "Main_Street"
+      SQL: "no"
   tasks:
     - set_fact:
         #result_item: '{{ item.name }}-{{ item.port }}'
         result_item: '{{ item.key }}-{{ item.value }}'
       with_dict:
-        - '{{ servers }}'
+        - '{{ surveyVars }}'
       register: result_list
 
     - set_fact:
