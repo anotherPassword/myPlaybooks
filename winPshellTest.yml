@@ -20,4 +20,4 @@
 
   - name: show dictionary
     debug: msg="{{item.key}} + ':' + {{item.value}}"
-    with_dict: varArray
+    with_dict: " {{varArray}} "
