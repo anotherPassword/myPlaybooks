@@ -18,6 +18,6 @@
   #- name: "Run script 'outputValues.ps1'"
   #  win_shell: D:\scripts\outputValues.ps1 -value01 "{{ listVars | join(',') }}" #sends LIST one,two,three  
 
-  - name: debug dictionary
-    debug: msg="{{ varArray | list }}"
-    #with_items: "{{ varArray | list }}"
+  - name: show dictionary
+    debug: msg="{{item.key}} + ':' + {{item.value}}"
+    with_dict: varArray
