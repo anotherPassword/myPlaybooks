@@ -1,5 +1,7 @@
-#variables test
-- hosts: all
+#Variables Test
+---
+- name: "Variables Test"
+  hosts: all
   connection: local
   vars:
     surveyVars:
