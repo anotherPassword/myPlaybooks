@@ -39,3 +39,7 @@
   # send to pshell
   - name: "Run script 'outputValues.ps1'"
     win_shell: D:\scripts\outputValues.ps1 -value01 "{{ result }}"
+    register: pshellResult
+  
+  - name: "pshell returned"
+    debug: var= "{{ pshellResult.stdout | from_json }}"
