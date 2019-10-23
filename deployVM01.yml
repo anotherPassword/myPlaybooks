@@ -39,11 +39,11 @@
   #try sending JSON
   - name: "set fact surveyvars to json"
     set_fact: 
-      resultToJSON: "{{ result | to_json }}"
+     surveyVarsToJSON: "{{ surveyvars | to_json }}"
   
   # send to pshell
   - name: "Run script 'outputValues.ps1'"
-    win_shell: D:\scripts\outputValues.ps1 -value01 "{{ resultToJSON }}"
+    win_shell: D:\scripts\outputValues.ps1 -value01 "{{ surveyVarsToJSON }}"
     #register: pshellResult
   
   #- name: "set fact pshell"
