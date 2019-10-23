@@ -42,4 +42,4 @@
     register: pshellResult
   
   - name: "pshell returned"
-    debug: var=pshellResult
+    debug: var= "{{ pshellResult.stdout | from_json }}"
