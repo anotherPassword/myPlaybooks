@@ -11,7 +11,7 @@
       os: "Windows_Server_2016"
       application: "Gen-pop"
       tier: "1"
-      environment: "Non-Prod"
+      environment: "Non-Prod1234"
       location: "Main_Street"
       SQL: "no"
     networkName: "VM Network"
