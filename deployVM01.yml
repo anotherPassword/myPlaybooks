@@ -45,7 +45,8 @@
   - name: "Run script 'outputValues.ps1'"
     win_shell: D:\scripts\outputValues.ps1 -value01 "{{ surveyVarsToJSON }}"
     #register: pshellResult
-  
+  - name: "surveyVarsToJSON are"
+    debug: var=surveyVarsToJSON
   #- name: "set fact pshell"
   #  set_fact: 
   #    pshellJSON: "{{ pshellResult.stdout | from_json }}"
