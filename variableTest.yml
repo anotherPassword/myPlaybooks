@@ -13,7 +13,7 @@
   tasks:
     - set_fact:
         #result_item: '{{ item.name }}-{{ item.port }}'
-        result_item: '{{ item.key }}-{{ item.value }}'
+        result_item: '{{ item.key }}:{{ item.value }}'
       with_dict:
         - '{{ surveyVars }}'
       register: result_list
