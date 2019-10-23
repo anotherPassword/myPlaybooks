@@ -39,7 +39,7 @@
     #password: '{{ vcenter_password }}' 
   # send to pshell
   - name: "Run script 'ansible_selectClusterBasedOnSurvey.ps1'"
-    win_shell: D:\scripts\vSphere\ansible_selectClusterBasedOnSurvey.ps1 -value01 '{{ lookup("env", "VMWARE_PASSWORD") }}'
+    win_shell: D:\scripts\vSphere\ansible_selectClusterBasedOnSurvey.ps1 -value01 '{{ ansible_password }}'
     register: pshellResult
   
   - name: "set fact pshell"
