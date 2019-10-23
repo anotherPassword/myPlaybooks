@@ -19,23 +19,23 @@
     clusterName: MD_CL11_GEN_POP_NONPROD
     group: group1
     
-    tasks:
-    # Take survey Vars dict and create list of concatenated key:value pairs
-    - name: "Set Fact result_list"
-    - set_fact: 
-        result_item: '{{ item.key }}:{{ item.value }}'
-      with_dict:
-        - '{{ surveyVars }}'
-      register: result_list
-    - name: "Build comma separated string"
-    - set_fact:
-      # Build comma separated string of the key:value pairs to send to pshell powercli to make cluster
-      # placement decision based on cluster tags    
-        result: '{{ result_list.results | map(attribute="ansible_facts.result_item") | join(",") }}'
-    - name: "In debug"
-    - debug:
-        var: result
+  tasks:
+  # Take survey Vars dict and create list of concatenated key:value pairs
+  - name: "Set Fact result_list"
+  - set_fact: 
+      result_item: '{{ item.key }}:{{ item.value }}'
+    with_dict:
+      - '{{ surveyVars }}'
+    register: result_list
+  - name: "Build comma separated string"
+  - set_fact:
+    # Build comma separated string of the key:value pairs to send to pshell powercli to make cluster
+    # placement decision based on cluster tags    
+      result: '{{ result_list.results | map(attribute="ansible_facts.result_item") | join(",") }}'
+  - name: "In debug"
+  - debug:
+      var: result
 
-    # send to pshell
-    - name: "Run script 'outputValues.ps1'"
-      win_shell: D:\scripts\outputValues.ps1 -value01 "{{ result }}"
+  # send to pshell
+  - name: "Run script 'outputValues.ps1'"
+    win_shell: D:\scripts\outputValues.ps1 -value01 "{{ result }}"
