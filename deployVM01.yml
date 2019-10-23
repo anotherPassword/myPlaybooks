@@ -35,10 +35,11 @@
   - name: "In debug"
     debug:
       var: result
-  
+    #username: '{{ vcenter_username }}'
+    #password: '{{ vcenter_password }}' 
   # send to pshell
-  - name: "Run script 'outputValues.ps1'"
-    win_shell: D:\scripts\outputValues.ps1 -value01 "{{ result }}"
+  - name: "Run script 'ansible_selectClusterBasedOnSurvey.ps1'"
+    win_shell: D:\scripts\vSphere\ansible_selectClusterBasedOnSurvey.ps1 -value01 "{{ vcenter_username }}"
     register: pshellResult
   
   - name: "set fact pshell"
