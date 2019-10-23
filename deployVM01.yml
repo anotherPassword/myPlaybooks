@@ -37,15 +37,18 @@
       var: result
 
   #try sending JSON
+  - name: "set fact surveyvars to json"
+    set_fact: 
+      resultToJSON: "{{ result | to_json }}"
   
   # send to pshell
   - name: "Run script 'outputValues.ps1'"
-    win_shell: D:\scripts\outputValues.ps1 -value01 "{{ surveyVars | to_json }}"
-    register: pshellResult
+    win_shell: D:\scripts\outputValues.ps1 -value01 "{{ resultToJSON }}"
+    #register: pshellResult
   
-  - name: "set fact pshell"
-    set_fact: 
-      pshellJSON: "{{ pshellResult.stdout | from_json }}"
+  #- name: "set fact pshell"
+  #  set_fact: 
+  #    pshellJSON: "{{ pshellResult.stdout | from_json }}"
   
-  - name: "the results are"
-    debug: var=pshellJSON
+  #- name: "the results are"
+  #  debug: var=pshellJSON
