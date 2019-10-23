@@ -1,8 +1,7 @@
 #Variables Test
 ---
 - name: "Variables Test"
-  hosts: all
-  connection: local
+  hosts: localhost
   vars:
     surveyVars:
       vmName: BSWANSBVMT01
