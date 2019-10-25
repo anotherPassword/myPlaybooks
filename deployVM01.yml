@@ -44,7 +44,7 @@
   
   - name: "set fact pshell"
     set_fact: 
-      pshellJSON: "{{ pshellResult.stdout | from_json }}"
+      destinationCluster: "{{ pshellResult.stdout }}"
   
   - name: "the results are"
-    debug: var=pshellJSON
+    debug: var=destinationCluster
