@@ -11,7 +11,7 @@
       os: "Windows"
       application: "Gen-pop"
       tier: "1"
-      environment: "Non-Prod"
+      environment: "Non-Production"
       location: "Temple"
       SQL: "no"
     networkName: "VM Network"
