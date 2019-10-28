@@ -8,12 +8,12 @@
       notes: Created by Ansible      
     surveyVars:
       vmName: BSWANSBVMT01
-      os: "Windows"
-      application: "Gen-pop"
-      tier: "1"
-      environment: "Non-Production"
-      location: "Temple"
-      SQL: "no"
+      ansible_CL_OS: "Windows"
+      ansible_CL_Application: "Gen-pop"
+      ansible_CL_Tier: "1"
+      ansible_CL_Environmen: "Non-Production"
+      ansible_CL_Location: "Temple"
+      ansible_CL_SQL: "no"
     networkName: "VM Network"
     templateName: VRATD2016PTC
     clusterName: MD_CL11_GEN_POP_NONPROD
