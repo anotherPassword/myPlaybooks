@@ -47,4 +47,4 @@
       destinationCluster: "{{ pshellResult.stdout }}"
   
   - name: "the results are"
-    debug: var=pshellResult
+    debug: var=destinationCluster
