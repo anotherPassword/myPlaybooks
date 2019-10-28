@@ -12,7 +12,7 @@
       application: "Gen-pop"
       tier: "1"
       environment: "Non-Prod"
-      location: "Main_Street"
+      location: "Temple"
       SQL: "no"
     networkName: "VM Network"
     templateName: VRATD2016PTC
