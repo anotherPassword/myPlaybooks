@@ -30,7 +30,7 @@
   - name: "Build comma separated string"
     set_fact:
     # Build comma separated string of the key:value pairs to send to pshell powercli to make cluster
-    # placement decision based on cluster tags    
+    # placement decision based on cluster attributes    
       csString: '{{ result_list.results | map(attribute="ansible_facts.result_item") | join(",") }}'
   - name: "Sending CS String"
     debug:
@@ -40,11 +40,23 @@
   # send to pshell
   - name: "Run script 'ansible_selectClusterBasedOnSurvey.ps1'"
     win_shell: D:\scripts\vSphere\ansible_selectClusterBasedOnSurvey.ps1 -ansibleString '{{ csString }}' -userName '{{ ansible_user }}' -password '{{ ansible_password }}'
-    register: pshellResult
+    register: pshellClusterPlacementResult
+  
+  - name: "set fact pshellClusterPlacementResult"
+    set_fact: 
+      destinationCluster: "{{ pshellClusterPlacementResult.stdout }}"
+  
+  - name: "the Cluster Placement results are"
+    debug: var=destinationCluster
+
+ # send to pshell
+  - name: "Run script 'ansible_getBCIP_For_Reservation_Network.ps1'"
+    win_shell: D:\scripts\IPAM\ansible_getBCIP_For_Reservation_Network.ps1 -clusterName '{{ destinationCluster }}' -vmName '{{ vmName }}' -userName '{{ ansible_user }}' -password '{{ ansible_password }}'
+    register: pshellNetworkResult
   
   - name: "set fact pshell"
     set_fact: 
-      destinationCluster: "{{ pshellResult.stdout }}"
+      destinationCluster: "{{ pshellNetworkResult.stdout }}"
   
-  - name: "the results are"
-    debug: var=destinationCluster
+  - name: "the NETWORK results are"
+    debug: var=pshellNetworkResult    
