@@ -44,7 +44,7 @@
   
   - name: "set fact pshellClusterPlacementResult"
     set_fact: 
-      destinationCluster: "{{ pshellClusterPlacementResult.stdout }}"
+      destinationCluster: "{{ pshellClusterPlacementResult.stdout | trim}}"
   
   - name: "the Cluster Placement results are"
     debug: var=destinationCluster
