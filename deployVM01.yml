@@ -51,7 +51,7 @@
 
  # send to pshell
   - name: "Run script 'ansible_getBCIP_For_Reservation_Network.ps1'"
-    win_shell: D:\scripts\IPAM\ansible_getBCIP_For_Reservation_Network.ps1 -clusterName '{{ destinationCluster }}' -vmName '{{ vmName }}' -userName '{{ ansible_user }}' -password '{{ ansible_password }}'
+    win_shell: D:\scripts\IPAM\ansible_getNetworks_for_Cluster.ps1 -clusterName '{{ destinationCluster }}' -userName '{{ ansible_user }}' -password '{{ ansible_password }}'
     register: pshellNetworkResult
   
   - name: "set fact pshell"
