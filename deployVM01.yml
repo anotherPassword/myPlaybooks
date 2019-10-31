@@ -63,7 +63,7 @@
  
  # Send desitination networks to pshell to get / set useable IP
   - name: "Run script 'ansible_getBCIP_For_Reservation_Network.ps1'"
-    win_shell: D:\scripts\IPAM\ansible_getNetworks_for_Cluster.ps1 -requestedSubnets '{{ destinationNetworks }}' -vmName  '{{ vmName }}' -userName '{{ ansible_user }}' -password '{{ ansible_password }}' -setReservation false
+    win_shell: D:\scripts\IPAM\ansible_getBCIP_For_Reservation_Network.ps1 -requestedSubnets '{{ destinationNetworks }}' -vmName  '{{ vmName }}' -userName '{{ ansible_user }}' -password '{{ ansible_password }}' -setReservation false
     register: pshellResult
   
   - name: "set fact pshell"
@@ -72,5 +72,3 @@
   
   - name: "the NETWORK results are"
     debug: var=destinationNetworks
-
-           
