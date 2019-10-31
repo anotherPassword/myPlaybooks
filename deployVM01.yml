@@ -37,7 +37,7 @@
       var: csString
     #username: '{{ vcenter_username }}'
     #password: '{{ vcenter_password }}' 
-  # send to pshell
+  # Send survey variables string to pshell to determine dest cluster
   - name: "Run script 'ansible_selectClusterBasedOnSurvey.ps1'"
     win_shell: D:\scripts\vSphere\ansible_selectClusterBasedOnSurvey.ps1 -ansibleString '{{ csString }}' -userName '{{ ansible_user }}' -password '{{ ansible_password }}'
     register: pshellClusterPlacementResult
@@ -49,14 +49,26 @@
   - name: "the Cluster Placement results are"
     debug: var=destinationCluster
 
- # send to pshell
-  - name: "Run script 'ansible_getBCIP_For_Reservation_Network.ps1'"
+ # Send desitination cluster to pshell to determine available networks for that cluster
+  - name: "Run script 'ansible_getNetworks_for_Cluster.ps1'"
     win_shell: D:\scripts\IPAM\ansible_getNetworks_for_Cluster.ps1 -clusterName '{{ destinationCluster }}' -userName '{{ ansible_user }}' -password '{{ ansible_password }}'
-    register: pshellNetworkResult
+    register: pshellResult
   
   - name: "set fact pshell"
     set_fact: 
-      destinationNetworks: "{{ pshellNetworkResult.stdout | trim }}"
+      destinationNetworks: "{{ pshellResult.stdout | trim }}"
   
   - name: "the NETWORK results are"
     debug: var=destinationNetworks   
+ 
+ # Send desitination networks to pshell to get / set useable IP
+  - name: "Run script 'ansible_getBCIP_For_Reservation_Network.ps1'"
+    win_shell: D:\scripts\IPAM\ansible_getNetworks_for_Cluster.ps1 -requestedSubnets '{{ destinationNetworks }}' -vmName  '{{ BSWANSBVMT01 }}' -userName '{{ ansible_user }}' -password '{{ ansible_password }}' -setReservation false
+    register: pshellResult
+  
+  - name: "set fact pshell"
+    set_fact: 
+      destinationNetworks: "{{ pshellResult.stdout | trim }}"
+  
+  - name: "the NETWORK results are"
+    debug: var=destinationNetworks
