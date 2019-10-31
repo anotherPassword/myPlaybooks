@@ -56,7 +56,7 @@
   
   - name: "set fact pshell"
     set_fact: 
-      destinationCluster: "{{ pshellNetworkResult.stdout }}"
+      destinationNetworks: "{{ pshellNetworkResult.stdout | trim }}"
   
   - name: "the NETWORK results are"
-    debug: var=pshellNetworkResult    
+    debug: var=destinationNetworks   
