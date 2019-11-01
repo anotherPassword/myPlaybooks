@@ -58,7 +58,7 @@
     set_fact: 
       destinationNetworks: "{{ pshellResult.stdout | trim }}"
   
-  - name: "the NETWORK results are"
+  - name: "the networks available for cluster '{{destinationCluster}}' are"
     debug: var=destinationNetworks   
  
  # Send desitination networks to pshell to get / set useable IP
@@ -68,7 +68,7 @@
   
   - name: "set fact pshell"
     set_fact: 
-      destinationNetworks: "{{ pshellResult.stdout | trim }}"
+      ipamResults: "{{ pshellResult.stdout | trim }}"
   
-  - name: "the NETWORK results are"
-    debug: var=destinationNetworks
+  - name: "the IPAM results are"
+    debug: var=ipamResults
