@@ -10,9 +10,3 @@
     register: winrmstatus
   - debug:
       msg: "{{ winrmstatus.name }}" 
-
-
-      ###this is a change
-  
-
-### this is another changed_when
