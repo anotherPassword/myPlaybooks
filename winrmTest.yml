@@ -9,4 +9,4 @@
      name: winRM
     register: winrmstatus
   - debug:
-      msg: "{{ winrmstatus.name }}" 
+      msg: "{{ winrmstatus }}" 
