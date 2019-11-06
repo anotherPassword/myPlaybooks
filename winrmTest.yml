@@ -10,5 +10,8 @@
     register: winrmstatus
   - debug:
       msg: "{{ winrmstatus.name }}" 
+
+
+      ###this is a change
   
 
