@@ -18,5 +18,6 @@
         schema: "vsphere"
       register: facts
 
-    - name: "Debug facts"
-      debug: var=facts.instance.availableField
+    - name: "Debug facts availableField"
+      debug: 
+      ms: "{{facts.instance.availableField.name}}"
