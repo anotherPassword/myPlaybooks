@@ -19,4 +19,4 @@
       register: facts
     - name: "VM Attributes are - "
       debug:  
-        msg: "{{ facts.instance.availableField }}"
+        msg: "{{ facts.instance.availableField['ansible_VM_Template_GOLD'] }}"
