@@ -19,10 +19,11 @@
       register: facts
 
     - name: Get key/value pairs for ansible_VM_*
+      no_log: True
       set_fact: 
         availableFields: "{{ item.key }}"
       with_dict: " {{facts.instance.availableField}} "
-      when: "item.value.name.startswith('ansible_VM_')"
+      #when: "item.value.name.startswith('ansible_VM_')"
 
 
 
