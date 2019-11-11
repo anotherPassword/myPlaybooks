@@ -19,4 +19,4 @@
       register: facts
     - name: "VM Attributes are - "
       debug:  
-        msg: "{{ facts }}"
+        msg: "{{ facts.instance.availableField.name | select('match', 'ansible_VM_*') }}"
