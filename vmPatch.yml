@@ -13,6 +13,7 @@
     - name: Get virtual machine custom attributes
       vmware_guest_facts:
         validate_certs: no
+        no_log: True
         datacenter: "{{ datacenterName }}"
         name: "{{ vmTemplateName }}"
         schema: "vsphere"
@@ -28,4 +29,4 @@
 
     - name: "VM Attributes are - "
       debug:  
-        msg: "{{ facts[0] }}"
+        msg: "{{ facts }}"
