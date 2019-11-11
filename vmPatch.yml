@@ -15,7 +15,6 @@
       validate_certs: no
       datacenter: "{{ datacenterName }}"
       name: "{{ vmTemplateName }}"
-      state: absent
     register: attributes
   - name: "VM Attributes are - "
     debug:
