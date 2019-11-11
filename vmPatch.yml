@@ -18,4 +18,5 @@
         schema: "vsphere"
       register: facts
     - name: "VM Attributes are - "
-      debug: var=facts
+      debug: 
+        var: "{{ facts.instance.availableField }}"
