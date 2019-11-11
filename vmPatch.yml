@@ -1,7 +1,7 @@
 #patch vm
 ---
 - name: "Get VM Template"
-  hosts: all
+  hosts: localhost
   vars:
     datacenterName: NTXMD
     notes: Created by Ansible 
@@ -13,8 +13,8 @@
   - name: Add virtual machine custom attributes
     vmware_guest_custom_attributes:
       validate_certs: no
-      name: "{{vmTemplateName}}"
-    delegate_to: localhost
+      datacenter: "{{ datacenterName }}"
+      name: "{{ vmTemplateName }}"
     register: attributes
   - name: "VM Attributes are - "
     debug:
