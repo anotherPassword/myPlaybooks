@@ -27,5 +27,7 @@
 
 
     - name: "VM Attributes are - "
+      set_fact: 
+        ansibleFields: "{{ facts.instance.availableField | map('json_query','{name:name,key:key}') | list}}"
       debug:  
-        msg: "{{ facts.instance.availableField | map('json_query','{name:name,key:key}') | dict}}"
+        msg: "{{ ansibleFields[0] }}"
