@@ -19,4 +19,4 @@
       register: facts
     - name: "VM Attributes are - "
       debug: 
-        var: "{{ facts.instance.availableField }}"
+        var: "{{ facts }}"
