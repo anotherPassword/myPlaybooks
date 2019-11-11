@@ -16,7 +16,7 @@
         datacenter: "{{ datacenterName }}"
         name: "{{ vmTemplateName }}"
         schema: "vsphere"
-        properties: ["instance.availableField.name"]
+        properties: ["instance.availableField"]
       register: facts
 
     - name: "Debug facts"
