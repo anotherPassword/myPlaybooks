@@ -16,3 +16,6 @@
       name: "{{vmTemplateName}}"
     delegate_to: localhost
     register: attributes
+  - name: "VM Attributes are - "
+    debug:
+      var: attributes
