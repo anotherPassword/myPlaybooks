@@ -22,7 +22,7 @@
       set_fact: 
         availableFields: "{{ item.key }}"
       with_dict: " {{facts.instance.availableField}} "
-      when: "item.name.startswith('ansible_VM_')"
+      when: "item.value.startswith('ansible_VM_')"
 
 
 
