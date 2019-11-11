@@ -18,4 +18,4 @@
     register: attributes
   - name: "VM Attributes are - "
     debug:
-      var: attributes
+      var: "{{ attributes.custom_attribute_defs }} "
