@@ -4,7 +4,7 @@
     
   tasks:
   
-  - name: Check winrm is Installed
+  - name: Check winrm is Installed and get status
     win_service:
      name: winRM
     register: winrmstatus

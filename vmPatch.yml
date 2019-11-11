@@ -1,24 +1,18 @@
 #patch vm
 ---
-- name: "Deploy VM Try 01 - David Smith"
+- name: "Get VM Template"
   hosts: all
   vars:
-    vcenterVars:
-      datacenterName: NTXMD
-      notes: Created by Ansible      
-    surveyVars:
-      vmName: BSWANSBVMT01
-      ansible_CL_OS: "Windows"
-      ansible_CL_Application: "Gen-pop"
-      ansible_CL_Tier: "1"
-      ansible_CL_Environment: "Non-Production"
-      ansible_CL_Location: "Main_Street"
-      ansible_CL_SQL: "no"
-    networkName: "VM Network"
-    templateName: VRATD2016PTC
-    clusterName: MD_CL11_GEN_POP_NONPROD
-    group: group1
+    datacenterName: NTXMD
+    notes: Created by Ansible 
+    vmTemplateName: BSWVMTPL2012R2
+  
     
   tasks:
   # Take survey Vars dict and create list of concatenated key:value pairs
-  - name: "Set Fact result_list"
+  - name: Add virtual machine custom attributes
+    vmware_guest_custom_attributes:
+      validate_certs: no
+      name: "{{vmTemplateName}}"
+    delegate_to: localhost
+    register: attributes
