@@ -28,4 +28,4 @@
 
     - name: "VM Attributes are - "
       debug:  
-        msg: "{{ facts.instance.availableField | map('json_query','{name:the_name}') | list}}"
+        msg: "{{ facts.instance.availableField | map('json_query','{the_name:name}') | list}}"
