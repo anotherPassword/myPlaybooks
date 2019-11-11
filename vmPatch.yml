@@ -20,4 +20,4 @@
 
     - name: "Debug facts availableField"
       debug: 
-      ms: "{{facts.instance.availableField.name}}"
+      msg: "{{facts.instance.availableField.name}}"
