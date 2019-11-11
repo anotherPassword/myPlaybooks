@@ -18,5 +18,5 @@
         schema: "vsphere"
       register: facts
     - name: "VM Attributes are - "
-      debug: 
-        var: "{{ facts }}"
+      debug:  
+        msg: "{{ facts }}"
