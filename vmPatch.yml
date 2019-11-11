@@ -17,6 +17,15 @@
         name: "{{ vmTemplateName }}"
         schema: "vsphere"
       register: facts
+
+    - name: Get key/value pairs for ansible_VM_*
+      set_fact: 
+        availableFields: "{{ item.key }}"
+      with_dict: " {{facts.instance.availableField}} "
+
+
+
+
     - name: "VM Attributes are - "
       debug:  
-        msg: "{{ facts.instance.availableField }}"
+        msg: "{{ availableFields }}"
