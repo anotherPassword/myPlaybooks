@@ -11,7 +11,7 @@
   tasks:
   # Take survey Vars dict and create list of concatenated key:value pairs
     - name: Get virtual machine custom attributes
-      vmware_guest_info:
+      vmware_guest_facts:
         validate_certs: no
         datacenter: "{{ datacenterName }}"
         name: "{{ vmTemplateName }}"
