@@ -1,0 +1,81 @@
+#vm guest facts parse
+---
+- hosts: localhost
+  #dest="{{ playbook_dir }}/testFile.yml"
+  vars:
+    msg:
+      instance:
+        availableField:
+        - managedObjectType: vim.VirtualMachine
+          _vimtype: vim.CustomFieldsManager.FieldDef
+          key: 402
+          fieldInstancePrivileges: 
+          fieldDefPrivileges: 
+          type: str
+          name: LastBackupStatus-com.dellemc.avamar
+        - managedObjectType: vim.VirtualMachine
+          _vimtype: vim.CustomFieldsManager.FieldDef
+          key: 403
+          fieldInstancePrivileges: 
+          fieldDefPrivileges: 
+          type: str
+          name: LastSuccessfulBackup-com.dellemc.avamar
+        - managedObjectType: vim.VirtualMachine
+          _vimtype: vim.CustomFieldsManager.FieldDef
+          key: 101
+          fieldInstancePrivileges: 
+          fieldDefPrivileges: 
+          type: str
+          name: VRM Owner
+        - managedObjectType: vim.VirtualMachine
+          _vimtype: vim.CustomFieldsManager.FieldDef
+          key: 401
+          fieldInstancePrivileges: 
+          fieldDefPrivileges: 
+          type: str
+          name: VSphereExtensionUtil.SNAPSHOT_TAG
+        - managedObjectType: vim.VirtualMachine
+          _vimtype: vim.CustomFieldsManager.FieldDef
+          key: 614
+          fieldInstancePrivileges: 
+          fieldDefPrivileges: 
+          type: str
+          name: ansible_VM_Template_GOLD
+        - managedObjectType: vim.VirtualMachine
+          _vimtype: vim.CustomFieldsManager.FieldDef
+          key: 611
+          fieldInstancePrivileges: 
+          fieldDefPrivileges: 
+          type: str
+          name: ansible_VM_Template_OS
+        - managedObjectType: vim.VirtualMachine
+          _vimtype: vim.CustomFieldsManager.FieldDef
+          key: 612
+          fieldInstancePrivileges: 
+          fieldDefPrivileges: 
+          type: str
+          name: ansible_VM_Template_OS_Version
+        - managedObjectType: vim.VirtualMachine
+          _vimtype: vim.CustomFieldsManager.FieldDef
+          key: 501
+          fieldInstancePrivileges: 
+          fieldDefPrivileges: 
+          type: str
+          name: com.emc.avamar.vmware.snapshot
+        - managedObjectType: vim.VirtualMachine
+          _vimtype: vim.CustomFieldsManager.FieldDef
+          key: 102
+          fieldInstancePrivileges: 
+          fieldDefPrivileges: 
+          type: str
+          name: vrmManagedMachine
+        customValue:
+        - key: 611
+          _vimtype: vim.CustomFieldsManager.StringValue
+          value: Windows
+        - key: 612
+          _vimtype: vim.CustomFieldsManager.StringValue
+          value: 2012R2
+        - key: 614
+          _vimtype: vim.CustomFieldsManager.StringValue
+          value: 'True'
