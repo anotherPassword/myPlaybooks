@@ -20,4 +20,4 @@
 
     - name: "Debug facts availableField"
       debug: 
-        msg: "{{facts.instance.availableField}}"
+        msg: "{{facts.instance.alarmActionsEnabled}}"
