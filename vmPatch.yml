@@ -18,6 +18,15 @@
         schema: "vsphere"
       register: facts
 
-    - name: "Debug facts availableField"
+    - name: "Show -vmid variable"
       debug: 
         msg: "{{facts.instance._vimid}}"
+       
+    - name: "Show availableField variable"
+      debug: 
+        msg: "{{facts.instance.availableField}}"
+    
+    - name: "Display all server names"
+      debug:
+        var: item
+      loop: "{{ facts | json_query('instance.availableField[*].name') }}"
