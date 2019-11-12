@@ -79,3 +79,14 @@
         - key: 614
           _vimtype: vim.CustomFieldsManager.StringValue
           value: 'True'
+  tasks:
+  #write vars
+  - name: 'Parse availableField'
+
+  - set_fact:
+      my_vm: "{{ msg | json_query(query) }}"
+    vars:
+      query: "instance.availableField[?starts_with(name, 'ansible_')].{Key: key,Value: name}"
+
+
+          
