@@ -83,20 +83,28 @@
   #write vars
   - name: 'Parse availableField'
     set_fact:
-      my_vm: "{{ msg | to_json | from_json | json_query(query) }}"
+      attributeNames: "{{ msg | to_json | from_json | json_query(query) }}"
     vars:
       query: "instance.availableField[?starts_with(name, 'ansible_')].{Key: key,Value: name}"
-      #query: "instance.availableField[*].key"
 
   - debug:
-      msg: "{{my_vm}}"
+      msg: "{{attributeNames}}"
 
   - name: 'Parse customValue'
     set_fact:
-      my_vm: "{{ msg | to_json | from_json | json_query(query) }}"
+      attributeValues: "{{ msg | to_json | from_json | json_query(query) }}"
     vars:
       query: "instance.customValue[*].{Key: key,Value: value}"
-      #query: "instance.availableField[*].key" 
+
   - debug:
-      msg: "{{my_vm}}"           
-          
+      msg: "{{attributeValues}}"
+
+  - name: merge lists
+    set_fact:
+      merged_list: "{{ merged_list|default([]) + [{ 'attribute_Name': item[0].name, 'attribute_Value': item[1].value}] }}"
+    when: "item[0].key == item[1].key"
+    loop: "{{ query('nested', attributeNames, attributeValues) }}"
+
+  - name: print results
+    debug:
+      var: merged_list
