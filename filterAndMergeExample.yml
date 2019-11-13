@@ -84,7 +84,7 @@
     set_fact:
       attributeNames: "{{ instance | to_json | from_json | json_query(query) }}"
     vars:
-      query: "instance.availableField[?starts_with(name, 'ansible_')].{Key: key,Value: name}"
+      query: "availableField[?starts_with(name, 'ansible_')].{Key: key,Value: name}"
 
   - debug:
       msg: "{{attributeNames}}"
@@ -93,7 +93,7 @@
     set_fact:
       attributeValues: "{{ instance | to_json | from_json | json_query(query) }}"
     vars:
-      query: "instance.customValue[*].{Key: key,Value: value}"
+      query: "customValue[*].{Key: key,Value: value}"
 
   - debug:
       msg: "{{attributeValues}}"
