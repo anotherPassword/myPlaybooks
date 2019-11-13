@@ -102,6 +102,7 @@
   - name: merge lists
     set_fact:
       merged_list: "{{ merged_list|default([]) + [{ 'attribute_Name': item[0].value, 'attribute_Value': item[1].value}] }}"
+      debug: msg="user {{ item[0].value }} is {{ item[1].value }}"
     when: "item[0].key == item[1].key"
     loop: "{{ query('nested', attributeNames, attributeValues) }}"
 
