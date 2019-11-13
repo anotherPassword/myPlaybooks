@@ -97,3 +97,15 @@
 
   - debug:
       msg: "{{attributeValues}}"
+
+### WORKS TO HERE ########
+
+  - name: merge lists
+    set_fact:
+      merged_list: "{{ merged_list|default([]) + [{ 'attribute_Name': item[0].Value, 'attribute_Value': item[1].Value }] }}"
+    when: "item[0].Key == item[1].Key"
+    loop: "{{ query('nested', attributeNames, attributeValues) }}"
+
+  - name: print results
+    debug:
+      var: merged_list
