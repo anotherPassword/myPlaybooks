@@ -96,5 +96,7 @@
       my_vm: "{{ msg | to_json | from_json | json_query(query) }}"
     vars:
       query: "instance.customValue[*].{Key: key,Value: value}"
-      #query: "instance.availableField[*].key"      
+      #query: "instance.availableField[*].key" 
+  - debug:
+      msg: "{{my_vm}}"           
           
