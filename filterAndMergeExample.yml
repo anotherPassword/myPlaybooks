@@ -88,5 +88,6 @@
       #query: "instance.availableField[?starts_with(name, 'ansible_')].{Key: key,Value: name}"
       query: "instance.availableField[*].key"
 
-
+  - debug:
+      msg: "{{my_vm}}}}"
           
