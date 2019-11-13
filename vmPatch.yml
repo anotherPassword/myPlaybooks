@@ -4,40 +4,14 @@
   hosts: localhost
   vars:
     datacenterName: NTXMD
-    notes: Created by Ansible 
     vmTemplateName: BSWVMTPL2012R2
-  
     
   tasks:
   # Take survey Vars dict and create list of concatenated key:value pairs
-    - name: Get virtual machine custom attributes
+    - name: Get VM Template Facts
       vmware_guest_facts:
         validate_certs: no
         datacenter: "{{ datacenterName }}"
         name: "{{ vmTemplateName }}"
         schema: "vsphere"
       register: vmInstance
-
-    - name: "Show -vmid variable"
-      debug: 
-        msg: "{{vmInstance.instance._vimid}}"
-       
-    - name: "Show availableField variable"
-      debug: 
-        msg: "{{vmInstance.instance.availableField}}"
-    
-    - name: "Display all attribute names"
-      debug:
-        var: item
-      loop: "{{ vmInstance | json_query('instance.availableField[*].name') }}"
-    
-    - name: "vmInstance **********************"
-      debug: 
-        msg: "{{vmInstance}}"
-#JEMSPATH http://jmespath.org/tutorial.html
-#    - name: "Display all ports from cluster1"
-#      debug:
-#        var: item
-#      loop: "{{ vmInstance | json_query(server_name_cluster1_query) }}"
-#      vars:
-#        server_name_cluster1_query: "vmInstance.availableField[?cluster=='cluster1'].port"

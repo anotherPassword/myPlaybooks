@@ -1,0 +1,14 @@
+#get VM Templates
+---
+- hosts: localhost
+  #dest="{{ playbook_dir }}/testFile.yml"
+
+  tasks:
+  #write vars
+  - name: Gather only registered virtual machine templates
+    vmware_vm_facts:
+      vm_type: template
+    register: template_facts
+
+  - debug:
+      var: template_facts.virtual_machines
