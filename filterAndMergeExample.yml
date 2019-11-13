@@ -86,7 +86,8 @@
       my_vm: "{{ msg | json_query(query) }}"
     vars:
       #query: "instance.availableField[?starts_with(name, 'ansible_')].{Key: key,Value: name}"
-      query: "instance.availableField[*].key"
+      #query: "instance.availableField[*].key"
+      query: "instance.availableField[?starts_with(name, 'ansible_')]"
 
   - debug:
       msg: "{{my_vm}}"
