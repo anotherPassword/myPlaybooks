@@ -98,13 +98,16 @@
 
   - debug:
       msg: "{{attributeValues}}"
-
-  - name: merge lists
-
+  - name: 'Set Facts'
     set_fact:
-      merged_list: "{{ merged_list|default([]) + [{ 'attribute_Name': item.value, 'attribute_Value': item.value}] }}"
+      attributeNames: "{{ attributeNames | from_json }}"
+      attributeValues: "{{ attributeValues | from_json }}"
 
-    when: "item.key == item.key"
+  - name: 'Merge Lists'
+    set_fact:
+      merged_list: "{{ merged_list|default([]) + [{ 'attribute_Name': item[0].value, 'attribute_Value': item[1].value}] }}"
+      #debug: msg="user {{ item[0].value }} is {{ item[1].value }}"
+    when: "item[0].key == item[1].key"
     loop: "{{ query('nested', attributeNames, attributeValues) }}"
 
   - name: print results
