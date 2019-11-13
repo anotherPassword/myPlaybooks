@@ -79,7 +79,7 @@
         _vimtype: vim.CustomFieldsManager.StringValue
         value: 'True'
   tasks:
-  #write vars
+  #    PARSE
   - name: 'Parse availableField'
     set_fact:
       attributeNames: "{{ instance | to_json | from_json | json_query(query) }}"
@@ -89,6 +89,7 @@
   - debug:
       msg: "{{attributeNames}}"
 
+########################################
   - name: 'Parse customValue'
     set_fact:
       attributeValues: "{{ instance | to_json | from_json | json_query(query) }}"
@@ -98,11 +99,15 @@
   - debug:
       msg: "{{attributeValues}}"
 
-  - name: 'Set Facts'
+############################################
+  - name: 'Set Facts 1'
     set_fact:
       attribute_Names: "{{ attributeNames | from_json }}"
+  - name: 'Set Facts 2'
+    set_fact:      
       attribute_Values: "{{ attributeValues | from_json }}"
 
+##########################################
   - name: 'Merge Lists'
     set_fact:
       merged_list: "{{ merged_list|default([]) + [{ 'attribute_Name': item[0].value, 'attribute_Value': item[1].value}] }}"
