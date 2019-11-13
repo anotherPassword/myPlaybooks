@@ -99,14 +99,6 @@
   - debug:
       msg: "{{attributeValues}}"
 
-############################################
-  - name: 'Set Facts 1'
-    set_fact:
-      attribute_Names: "{{ attributeNames | from_json }}"
-  - name: 'Set Facts 2'
-    set_fact:      
-      attribute_Values: "{{ attributeValues | from_json }}"
-
 ##########################################
   - name: 'Merge Lists'
     set_fact:
