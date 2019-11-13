@@ -89,5 +89,5 @@
       query: "instance.availableField[*].key"
 
   - debug:
-      msg: "{{my_vm}}}}"
+      msg: "{{my_vm}}"
           
