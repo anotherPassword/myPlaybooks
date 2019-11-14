@@ -1,7 +1,7 @@
 #getCluster
 ---
   #run MODULE against localhost
-  hosts: localhost
+  hosts: all
  
   tasks:
     - name: 'gater VM facts to determine if power action needed'
