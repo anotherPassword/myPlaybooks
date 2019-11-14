@@ -11,3 +11,10 @@
     register: cluster_info
   - debug:
       var: cluster_info
+
+
+  - name: Gather vmware host facts from vCenter with tag information
+    vmware_host_facts:
+      esxi_hostname: ntxmdh154.bhcs.pvt
+      show_tag: True
+  register: host_facts_tag
