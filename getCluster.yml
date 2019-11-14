@@ -3,7 +3,7 @@
 - hosts: all
 
   tasks:
-  - name: 'gater VM facts to determine if power action needed'
+  - name: Cluster Info
     vmware_cluster_facts:
       datacenter: NTXMD
       validate_certs: no
@@ -17,4 +17,6 @@
     vmware_host_facts:
       esxi_hostname: ntxmdh154.bhcs.pvt
       show_tag: True
-  register: host_facts_tag
+    register: host_facts_tag
+  - debug:
+      var: host_facts_tag    
