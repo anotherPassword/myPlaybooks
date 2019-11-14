@@ -1,13 +1,12 @@
 #getCluster
 ---
-  #run MODULE against localhost
-  hosts: all
- 
+- hosts: all
+
   tasks:
-    - name: 'gater VM facts to determine if power action needed'
-      vmware_cluster_info:
-        datacenter: NTX
-        validate_certs: no
-      register: cluster_info
-    - debug:
+  - name: 'gater VM facts to determine if power action needed'
+    vmware_cluster_info:
+      datacenter: NTX
+      validate_certs: no
+    register: cluster_info
+  - debug:
       var: cluster_info
