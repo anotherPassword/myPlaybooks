@@ -1,6 +1,6 @@
 #getCluster
 ---
-- hosts: all
+- hosts: localhost
 
   tasks:
   - name: 'gater VM facts to determine if power action needed'
