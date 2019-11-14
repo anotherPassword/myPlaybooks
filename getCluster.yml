@@ -1,0 +1,14 @@
+#getCluster
+---
+- name: 'Set powerstate of a virtual machine to poweroff or on'
+  #run MODULE against localhost
+  hosts: localhost
+ 
+  tasks:
+    - name: 'gater VM facts to determine if power action needed'
+      vmware_cluster_info:
+        datacenter: NTX
+        register: cluster_info
+        validate_certs: no
+    - debug:
+      var: cluster_info
