@@ -5,7 +5,7 @@
   tasks:
   - name: 'gater VM facts to determine if power action needed'
     vmware_cluster_facts:
-      datacenter: NTX
+      datacenter: NTXMD
       validate_certs: no
       cluster_name: MD_CL11_GEN_POP_NONPROD
     register: cluster_info
