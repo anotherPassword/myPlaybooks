@@ -7,6 +7,7 @@
     vmware_cluster_facts:
       datacenter: NTX
       validate_certs: no
+      cluster_name: MD_CL11_GEN_POP_NONPROD
     register: cluster_info
   - debug:
       var: cluster_info
