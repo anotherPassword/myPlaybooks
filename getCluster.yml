@@ -4,7 +4,7 @@
 
   tasks:
   - name: 'gater VM facts to determine if power action needed'
-    vmware_cluster_info:
+    vmware_cluster_facts:
       datacenter: NTX
       validate_certs: no
     register: cluster_info
