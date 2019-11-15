@@ -11,3 +11,5 @@
     register: winrmstatus
   - debug:
       msg: "{{ winrmstatus }}" 
+
+      
