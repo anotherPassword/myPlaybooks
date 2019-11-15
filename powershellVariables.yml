@@ -13,14 +13,7 @@
       SQL: "no"    
 
   tasks:
-  
-  - name: 'send JSON'
-    win_service:
-     name: winRM
-    register: winrmstatus
-  - debug:
-      msg: "{{ winrmstatus }}" 
 
   - name: "Run script '.ps1'"
-    win_shell: D:\scripts\outputValues.ps1 -ansibleString 'one,two,three' #-userName '{{ ansible_user }}' -password '{{ ansible_password }}'
+    win_shell: D:\scripts\outputValues.ps1 -value01 'one,two,three' #-userName '{{ ansible_user }}' -password '{{ ansible_password }}'
     register: pshellClusterPlacementResult
