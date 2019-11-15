@@ -1,15 +1,26 @@
 #powershell variables test
 ---
-- name: Check winrm
+- name: Variables Test
   hosts: all
-    
+  vars:
+    surveyVars:
+      vmName: BSWANSBVMT01
+      os: "Windows_Server_2016"
+      application: "Gen-pop"
+      tier: "1"
+      environment: "Non-Prod"
+      location: "Main_Street"
+      SQL: "no"    
+
   tasks:
   
-  - name: Check winrm is Installed and get status
+  - name: 'send JSON'
     win_service:
      name: winRM
     register: winrmstatus
   - debug:
       msg: "{{ winrmstatus }}" 
 
-      
+  - name: "Run script '.ps1'"
+    win_shell: D:\scripts\outputValues.ps1 -ansibleString 'one,two,three' #-userName '{{ ansible_user }}' -password '{{ ansible_password }}'
+    register: pshellClusterPlacementResult
