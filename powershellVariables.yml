@@ -4,7 +4,7 @@
   hosts: all
   vars:
     surveyVars:
-      vmName: 
+      vmName: ""
       ansible_CL_OS: "Windows"
       ansible_CL_Application: "Gen-pop"
       ansible_CL_Tier: "1"
