@@ -3,18 +3,13 @@
 - name: Variables Test
   hosts: all
   vars:
-    surveyVars:
-      vmName: ""
-      ansible_CL_OS: "Windows"
-      ansible_CL_Application: "Gen-pop"
-      ansible_CL_Tier: "1"
-      ansible_CL_Environment: "Non-Production"
-      ansible_CL_Location: "Main_Street"
-      ansible_CL_SQL: "no"
-    networkName: "VM Network"
-    templateName: VRATD2016PTC
-    clusterName: MD_CL11_GEN_POP_NONPROD
-    group: group1
+    ansible_VM_vmName: ""
+    ansible_CL_OS: "Windows"
+    ansible_CL_Application: "Gen-pop"
+    ansible_CL_Tier: "1"
+    ansible_CL_Environment: "Non-Production"
+    ansible_CL_Location: "Main_Street"
+    ansible_CL_SQL: "no"
     
     vm:
       annotation: This is a VM
