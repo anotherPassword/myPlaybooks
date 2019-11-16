@@ -91,4 +91,5 @@
     win_shell: D:\scripts\outputValues.ps1 -surveyVars "{{surveyVars}}" -vm "{{vm}}" #-userName '{{ ansible_user }}' -password '{{ ansible_password }}'
     # "{{ surveyVars | list | join("\", \"") }}"
     register: pshellClusterPlacementResult
-  - debug: var=pshellClusterPlacementResult
+  - debug: 
+      msg: "{{pshellClusterPlacementResult | to_nice_json }}"
