@@ -15,5 +15,5 @@
   tasks:
 
   - name: "Run script '.ps1'"
-    win_shell: D:\scripts\outputValues.ps1 -value01 "{{surveyVars | to_nice_json }}" #-userName '{{ ansible_user }}' -password '{{ ansible_password }}'
+    win_shell: D:\scripts\outputValues.ps1 -value01 "{{surveyVars }}" #-userName '{{ ansible_user }}' -password '{{ ansible_password }}'
     register: pshellClusterPlacementResult
