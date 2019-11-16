@@ -3,25 +3,74 @@
 - name: Variables Test
   hosts: all
   vars:
-    vcenterVars:
-      datacenterName: NTXMD
-      notes: Created by Ansible      
-    surveyVars:
-      vmName: BSWANSBVMT01
-      ansible_CL_OS: "Windows"
-      ansible_CL_Application: "Gen-pop"
-      ansible_CL_Tier: "1"
-      ansible_CL_Environment: "Non-Production"
-      ansible_CL_Location: "Main_Street"
-      ansible_CL_SQL: "no"
-    networkName: "VM Network"
-    templateName: VRATD2016PTC
-    clusterName: MD_CL11_GEN_POP_NONPROD
-    group: group1    
+    vm:
+      annotation: This is a VM
+      cdrom:
+        type: client
+        iso_path: ''
+        controller_type: ''
+        state: ''
+      cluster: ''
+      convert: ''
+      customization:
+        existing_vm: 'False'
+        dns_servers:
+        - 10.7.200.95
+        - 10.130.200.95
+        dns_suffix: bhcs.pvt
+        domain: bhcs.pvt
+        hostname: ''
+        autologon: ''
+        autologoncount: ''
+        domainadmin: ''
+        domainadminpassword: ''
+        fullname: ''
+        joindomain: ''
+        joinworkgroup: ''
+        orgname: BHCS
+        password: ''
+        productid: ''
+        runonce: ''
+        timezone: '20'
+      datacenter: ''
+      disks:
+      - size_gb: ''
+        type: thin
+      folder: ''
+      force: ''
+      hardware:
+        hotadd_cpu: 'True'
+        hotremove_cpu: ''
+        hotadd_memory: ''
+        memory_mb: ''
+        num_cpus: ''
+        num_cpu_cores_per_socket: ''
+        scsi: ''
+        version: ''
+      is_template: ''
+      networks:
+      - name: ''
+        vlan: ''
+        device_type: vmxnet3
+        mac: ''
+        dvswitch_name: ''
+        start_connected: 'True'
+        type: static
+        ip: ''
+        netmask: ''
+        gateway: ''
+        dns_servers: ''
+        domain: bhcs.pvt
+        wake_on_lan: ''
+        allow_guest_control: ''
+      state: present
+      template: ''
+      validate_certs: 'False'
+      wait_for_customization: 'yes'   
 
   tasks:
 
   - name: "Run script '.ps1'"
-    win_shell: D:\scripts\outputValues.ps1 -value01 "{{ surveyVars }}" #-userName '{{ ansible_user }}' -password '{{ ansible_password }}'
+    win_shell: D:\scripts\outputValues.ps1 -value01 "{{ vm}}" #-userName '{{ ansible_user }}' -password '{{ ansible_password }}'
     # "{{ surveyVars | list | join("\", \"") }}"
     register: pshellClusterPlacementResult
