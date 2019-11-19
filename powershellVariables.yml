@@ -93,4 +93,4 @@
     register: pshellClusterPlacementResult
   - name: "output"
     debug: 
-      var: "{{pshellClusterPlacementResult.ansible_CL_OS}}" 
+      var: "{{pshellClusterPlacementResult}}" 
