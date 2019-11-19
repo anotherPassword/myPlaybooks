@@ -93,4 +93,4 @@
     register: pshellClusterPlacementResult
   - name: "------- OUTPUT -------"
     debug: 
-      var: "{{pshellClusterPlacementResult}}" 
+      msg: "{{pshellClusterPlacementResult}}" 
