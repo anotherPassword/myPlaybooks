@@ -93,4 +93,4 @@
     register: pshellClusterPlacementResult
   - name: "------- OUTPUT -------"
     debug: 
-      msg: "{{pshellClusterPlacementResult | to_nice_json}}" 
+      msg: "{{pshellClusterPlacementResult | from_json}}" 
