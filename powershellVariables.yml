@@ -88,7 +88,7 @@
   tasks:
 
   - name: "Run script '.ps1'"
-    win_shell: D:\scripts\outputValues.ps1 -vm "{{vm | from_yaml}}" #  -vm "{{vm}}" #-userName '{{ ansible_user }}' -password '{{ ansible_password }}'
+    win_shell: D:\scripts\outputValues.ps1 -vm "{{vm | to_yaml}}" #  -vm "{{vm}}" #-userName '{{ ansible_user }}' -password '{{ ansible_password }}'
     # "{{ surveyVars | list | join("\", \"") }}"
     register: result
   - name: Process win_shell output
