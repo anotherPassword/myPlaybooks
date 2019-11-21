@@ -98,3 +98,5 @@
   - name: Return Values
     debug:
       msg: "{{ vm.ansible_CL_OS }}"
+
+      
