@@ -90,7 +90,11 @@
   - name: "Run script '.ps1'"
     win_shell: D:\scripts\outputValues.ps1 -surveyVars "{{surveyVars}}" #-vm "{{vm}}" #-userName '{{ ansible_user }}' -password '{{ ansible_password }}'
     # "{{ surveyVars | list | join("\", \"") }}"
-    register: pshellClusterPlacementResult
-  - name: "------- OUTPUT -------"
-    debug: 
-      msg: "{{pshellClusterPlacementResult | from_json}}" 
+    register: result
+  - name: Process win_shell output
+    set_fact:
+      vm: "{{ result.stdout | from_json }}"
+  
+  - name: Return Values
+    debug:
+      msg: {{ vm }}
