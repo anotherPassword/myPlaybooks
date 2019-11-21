@@ -97,4 +97,4 @@
   
   - name: Return Values
     debug:
-      msg: {{ vm }}
+      msg: "{{ vm }}"
