@@ -3,22 +3,6 @@
 - name: Variables Test
   hosts: all
   vars:
-    vmName: ""
-    OS: ""
-    Application: ""
-    Tier: ""
-    Environment: ""
-    Location: ""
-    SQL: ""
-
-    surveyVars:    
-      ansible_VM_vmName: "{{vmName}}"
-      ansible_CL_OS: "{{OS}}"
-      ansible_CL_Application: "{{Application}}"
-      ansible_CL_Tier: "{{Tier}}"
-      ansible_CL_Environment: "{{Environment}}"
-      ansible_CL_Location: "{{Location}}"
-      ansible_CL_SQL: "{{SQL}}"    
     
     vm:
       annotation: This is a VM
@@ -28,67 +12,11 @@
         controller_type: ''
         state: ''
       cluster: ''
-      convert: ''
-      customization:
-        existing_vm: 'False'
-        dns_servers:
-        - 10.7.200.95
-        - 10.130.200.95
-        dns_suffix: bhcs.pvt
-        domain: bhcs.pvt
-        hostname: ''
-        autologon: ''
-        autologoncount: ''
-        domainadmin: ''
-        domainadminpassword: ''
-        fullname: ''
-        joindomain: ''
-        joinworkgroup: ''
-        orgname: BHCS
-        password: ''
-        productid: ''
-        runonce: ''
-        timezone: '20'
-      datacenter: ''
-      disks:
-      - size_gb: ''
-        type: thin
-      folder: ''
-      force: ''
-      hardware:
-        hotadd_cpu: 'True'
-        hotremove_cpu: ''
-        hotadd_memory: ''
-        memory_mb: ''
-        num_cpus: ''
-        num_cpu_cores_per_socket: ''
-        scsi: ''
-        version: ''
-      is_template: ''
-      networks:
-      - name: ''
-        vlan: ''
-        device_type: vmxnet3
-        mac: ''
-        dvswitch_name: ''
-        start_connected: 'True'
-        type: static
-        ip: ''
-        netmask: ''
-        gateway: ''
-        dns_servers: ''
-        domain: bhcs.pvt
-        wake_on_lan: ''
-        allow_guest_control: ''
-      state: present
-      template: ''
-      validate_certs: 'False'
-      wait_for_customization: 'yes'   
 
   tasks:
 
   - name: "Run script '.ps1'"
-    win_shell: D:\scripts\outputValues.ps1 -vm "{{vm | to_yaml}}" #  -vm "{{vm}}" #-userName '{{ ansible_user }}' -password '{{ ansible_password }}'
+    win_shell: D:\scripts\outputValues.ps1 -vm "{{vm }}" #  -vm "{{vm}}" #-userName '{{ ansible_user }}' -password '{{ ansible_password }}'
     # "{{ surveyVars | list | join("\", \"") }}"
     register: result
   - name: Process win_shell output
