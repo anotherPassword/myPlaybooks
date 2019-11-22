@@ -19,6 +19,10 @@
     set_fact:
       vmToJSON: "{{ vm | to_json }}" 
 
+  - name: 'THE VM TO JSON'
+    debug:
+      msg: "{{ vmToJSON }}"     
+
   - name: "Run script '.ps1'"
     win_shell: D:\scripts\outputValues.ps1 -vm "{{vmToJSON}}" #  -vm "{{vm}}" #-userName '{{ ansible_user }}' -password '{{ ansible_password }}'
     # "{{ surveyVars | list | join("\", \"") }}"
