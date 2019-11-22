@@ -15,9 +15,12 @@
       cluster: ''
 
   tasks:
+  - name: Process win_shell output
+    set_fact:
+      vmToJSON: "{{ vm | to_json }}" 
 
   - name: "Run script '.ps1'"
-    win_shell: D:\scripts\outputValues.ps1 -vm "{{vm | to_json | b64encode}}" #  -vm "{{vm}}" #-userName '{{ ansible_user }}' -password '{{ ansible_password }}'
+    win_shell: D:\scripts\outputValues.ps1 -vm "{{vmToJSON}" #  -vm "{{vm}}" #-userName '{{ ansible_user }}' -password '{{ ansible_password }}'
     # "{{ surveyVars | list | join("\", \"") }}"
     register: result
   - name: Process win_shell output
