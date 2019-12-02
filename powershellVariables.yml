@@ -58,7 +58,7 @@
       hardware:
         hotadd_cpu: 'True'
         hotremove_cpu: ''
-        hotadd_memory: ''
+        hotadd_memory: 'True'
         memory_mb: ''
         num_cpus: ''
         num_cpu_cores_per_socket: ''

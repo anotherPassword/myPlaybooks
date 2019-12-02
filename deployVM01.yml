@@ -1,53 +1,122 @@
-#deploy VM 1st try
+#powershell variables test
 ---
-- name: "Deploy VM Try 01 - David Smith"
+- name: Set Environment and Variables
   hosts: all
   vars:
-    vcenterVars:
-      datacenterName: NTXMD
-      notes: Created by Ansible      
-    surveyVars:
-      vmName: BSWANSBVMT01
-      ansible_CL_OS: "Windows"
-      ansible_CL_Application: "Gen-pop"
-      ansible_CL_Tier: "1"
-      ansible_CL_Environment: "Non-Production"
-      ansible_CL_Location: "Main_Street"
-      ansible_CL_SQL: "no"
-    networkName: "VM Network"
-    templateName: VRATD2016PTC
-    clusterName: MD_CL11_GEN_POP_NONPROD
-    group: group1
-    
+    #these are top level vars, can't populate 'surveyvars' as it is not top level?
+    vmName: ""
+    OS: ""
+    Application: ""
+    Tier: ""
+    Environment: ""
+    Location: ""
+    SQL: ""
+    #action pshell script will perform
+    pshellScriptAction: ""
+    #populate surveyVars with survey answers
+    surveyVars:    
+      ansible_VM_vmName: "{{vmName}}"
+      ansible_CL_OS: "{{OS}}"
+      ansible_CL_Application: "{{Application}}"
+      ansible_CL_Tier: "{{Tier}}"
+      ansible_CL_Environment: "{{Environment}}"
+      ansible_CL_Location: "{{Location}}"
+      ansible_CL_SQL: "{{SQL}}"    
+    #the template to build a VM with some defautl variables defined
+    vm:
+      annotation: This is a VM
+      cdrom:
+        type: client
+        iso_path: ''
+        controller_type: ''
+        state: ''
+      cluster: ''
+      convert: ''
+      customization:
+        existing_vm: 'False'
+        dns_servers:
+        - 10.7.200.95
+        - 10.130.200.95
+        dns_suffix: bhcs.pvt
+        domain: bhcs.pvt
+        hostname: ''
+        autologon: ''
+        autologoncount: ''
+        domainadmin: ''
+        domainadminpassword: ''
+        fullname: ''
+        joindomain: ''
+        joinworkgroup: ''
+        orgname: BHCS
+        password: ''
+        productid: ''
+        runonce: ''
+        timezone: '20'
+      datacenter: ''
+      disks:
+      - size_gb: ''
+        type: thin
+      folder: ''
+      force: ''
+      hardware:
+        hotadd_cpu: 'True'
+        hotremove_cpu: ''
+        hotadd_memory: 'True'
+        memory_mb: ''
+        num_cpus: ''
+        num_cpu_cores_per_socket: ''
+        scsi: ''
+        version: ''
+      is_template: ''
+      networks:
+      - name: ''
+        vlan: ''
+        device_type: vmxnet3
+        mac: ''
+        dvswitch_name: ''
+        start_connected: 'True'
+        type: static
+        ip: ''
+        netmask: ''
+        gateway: ''
+        dns_servers: ''
+        domain: bhcs.pvt
+        wake_on_lan: ''
+        allow_guest_control: ''
+      state: present
+      template: ''
+      validate_certs: 'False'
+      wait_for_customization: 'yes'   
+
   tasks:
-  # Take survey Vars dict and create list of concatenated key:value pairs
-  - name: "Set Fact result_list"
+  # Some script to dump vars to pshell, which writes to txt file and returns some stuff
+  # as a test of what we are getting back and forth from here to powershell and back
+  #- name: "Run script '.ps1'"
+  #  #Send dicts to powershell, they show up with u'*'. Powershell converts to json, 
+  #  # then to pshell object for . notation, sets some values, sends back pure JSON
+  #  win_shell: D:\scripts\outputValues.ps1 -surveyVars "{{surveyVars }}" -vm "{{vm }}" #-userName '{{ ansible_user }}' -password '{{ ansible_password }}'
+  #  register: result
+  #- name: Process win_shell output
+  #  set_fact:
+  #    vm: "{{ result.stdout | from_json }}"
+  #- name: Return Values
+  #  debug:
+  #    msg: "{{ vm }}"
+
+#ORIGINAL FILE
+#deploy VM 1st try
+
+  - name: "Run script 'ansible_deployVM.ps1' and get cluster based on Survey"
     set_fact: 
-      result_item: '{{ item.key }}:{{ item.value }}'
-    with_dict:
-      - '{{ surveyVars }}'
-    register: result_list
-  - name: "Build comma separated string"
+      pshellScriptAction: "getClusterBasedOnSurvey"
+    win_shell: D:\scripts\vSphere\ansible_selectClusterBasedOnSurvey.ps1 -pshellScriptAction "{pshellScriptAction}" -surveyVars "{{surveyVars }}" -vm "{{vm }}" -userName '{{ ansible_user }}' -password '{{ ansible_password }}'
+    register: result
+  - name: Process win_shell output
     set_fact:
-    # Build comma separated string of the key:value pairs to send to pshell powercli to make cluster
-    # placement decision based on cluster attributes    
-      csString: '{{ result_list.results | map(attribute="ansible_facts.result_item") | join(",") }}'
-  - name: "Sending CS String"
-    debug:
-      var: csString
-    #username: '{{ vcenter_username }}'
-    #password: '{{ vcenter_password }}' 
-  # Send survey variables string to pshell to determine dest cluster
-  - name: "Run script 'ansible_selectClusterBasedOnSurvey.ps1'"
-    win_shell: D:\scripts\vSphere\ansible_selectClusterBasedOnSurvey.ps1 -ansibleString '{{ csString }}' -userName '{{ ansible_user }}' -password '{{ ansible_password }}'
-    register: pshellClusterPlacementResult
+      vm: "{{ result.stdout | from_json }}"
   
-  - name: "set fact pshellClusterPlacementResult"
-    set_fact: 
-      destinationCluster: "{{ pshellClusterPlacementResult.stdout | trim}}"
-  
-  - name: "the Cluster Placement results are"
-    debug: var=destinationCluster
+  - name: "the VM variable including Cluster Placement results are"
+    debug: "{vm}"
 
  # Send desitination cluster to pshell to determine available networks for that cluster
   - name: "Run script 'ansible_getNetworks_for_Cluster.ps1'"
