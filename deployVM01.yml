@@ -12,7 +12,7 @@
     Location: ""
     SQL: ""
     #action pshell script will perform
-    pshellScriptAction: ""
+    pshellScriptAction: "getClusterBasedOnSurvey"
     #populate surveyVars with survey answers
     surveyVars:    
       ansible_VM_vmName: "{{vmName}}"
@@ -106,9 +106,9 @@
 #ORIGINAL FILE
 #deploy VM 1st try
 
-  - name: 'set fact'
-    set_fact: 
-      pshellScriptAction: "getClusterBasedOnSurvey"
+  #- name: 'set fact'
+  #  set_fact: 
+  #    pshellScriptAction: "getClusterBasedOnSurvey"
   
   - name: "Run script 'ansible_deployVM.ps1' and get cluster based on Survey"
     win_shell: D:\scripts\vSphere\ansible_deployVM.ps1 -pshellScriptAction "{pshellScriptAction}" -surveyVars "{{surveyVars }}" -vm "{{vm }}" -userName '{{ ansible_user }}' -password '{{ ansible_password }}'
