@@ -119,7 +119,7 @@
       vm: "{{ result.stdout | from_json }}"
   
   - name: "the VM variable including Cluster Placement results are"
-    debug: var="{vm}"
+    debug: var=vm
 
  # Send desitination cluster to pshell to determine available networks for that cluster
   - name: "Run script 'ansible_getNetworks_for_Cluster.ps1'"
