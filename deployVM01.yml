@@ -109,15 +109,17 @@
   - name: 'set fact'
     set_fact: 
       pshellScriptAction: "getClusterBasedOnSurvey"
+  
   - name: "Run script 'ansible_deployVM.ps1' and get cluster based on Survey"
     win_shell: D:\scripts\vSphere\ansible_selectClusterBasedOnSurvey.ps1 -pshellScriptAction "{pshellScriptAction}" -surveyVars "{{surveyVars }}" -vm "{{vm }}" -userName '{{ ansible_user }}' -password '{{ ansible_password }}'
     register: result
+  
   - name: Process win_shell output
     set_fact:
       vm: "{{ result.stdout | from_json }}"
   
   - name: "the VM variable including Cluster Placement results are"
-    debug: "{vm}"
+    debug: var="{vm}"
 
  # Send desitination cluster to pshell to determine available networks for that cluster
   - name: "Run script 'ansible_getNetworks_for_Cluster.ps1'"
