@@ -12,7 +12,7 @@
     Location: ""
     SQL: ""
     #action pshell script will perform
-    pshellScriptAction: "getClusterBasedOnSurvey"
+    pshellScriptAction: ""
     #populate surveyVars with survey answers
     surveyVars:    
       ansible_VM_vmName: "{{vmName}}"
@@ -110,7 +110,11 @@
   #- name: 'set fact'
   #  set_fact: 
   #    pshellScriptAction: "getClusterBasedOnSurvey"
-  
+ 
+ ##########
+  - name: "set pshellScriptAction to getClusterBasedOnSurvey"
+    set_fact:
+      pshellScriptAction: getClusterBasedOnSurvey
   - name: "Run script 'ansible_deployVM.ps1' and get cluster based on Survey"
     win_shell: D:\scripts\vSphere\ansible_deployVM.ps1 -pshellScriptAction "{{pshellScriptAction}}" -surveyVars "{{surveyVars }}" -vm "{{vm }}" -userName '{{ ansible_user }}' -password '{{ ansible_password }}'
     register: result
@@ -121,9 +125,12 @@
   
   - name: "the VM variable including Cluster Placement results are"
     debug: var=vm
-
+  #########
+  - name: "set pshellScriptAction to getNetworksForCluster"
+    set_fact:
+      pshellScriptAction: getNetworksForCluster
   - name: "Run script 'ansible_deployVM.ps1' and get cluster based on Survey"
-    win_shell: D:\scripts\vSphere\ansible_deployVM.ps1 -pshellScriptAction "{{getNetworksForCluster}}" -surveyVars "{{surveyVars }}" -vm "{{vm}}" -userName '{{ ansible_user }}' -password '{{ ansible_password }}'
+    win_shell: D:\scripts\vSphere\ansible_deployVM.ps1 -pshellScriptAction "{{pshellScriptAction}}" -surveyVars "{{surveyVars }}" -vm "{{vm}}" -userName '{{ ansible_user }}' -password '{{ ansible_password }}'
     register: result
   
   - name: Process win_shell output
