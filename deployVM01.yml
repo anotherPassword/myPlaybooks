@@ -21,11 +21,8 @@
       ansible_CL_Tier: "{{Tier}}"
       ansible_CL_Environment: "{{Environment}}"
       ansible_CL_Location: "{{Location}}"
-      ansible_CL_SQL: "{{SQL}}"    
-    #overall status of gathering info for vm airbrake_deployment
-    buiidStatus:
-      clusterAssigned: ""
-      ipAssigned: ""
+      ansible_CL_SQL: "{{SQL}}"
+      vcenter_CL_availableSubnets: ""    
     #the template to build a VM with some defautl variables defined
     vm:
       annotation: This is a VM
@@ -125,31 +122,13 @@
   - name: "the VM variable including Cluster Placement results are"
     debug: var=vm
 
- # Send desitination cluster to pshell to determine available networks for that cluster
-  - name: "Run script 'ansible_getNetworks_for_Cluster.ps1'"
-    win_shell: D:\scripts\IPAM\ansible_getNetworks_for_Cluster.ps1 -clusterName '{{ destinationCluster }}' -userName '{{ ansible_user }}' -password '{{ ansible_password }}'
-    register: pshellResult
+  - name: "Run script 'ansible_deployVM.ps1' and get cluster based on Survey"
+    win_shell: D:\scripts\vSphere\ansible_deployVM.ps1 -pshellScriptAction "{{getNetworksForCluster}}" -surveyVars "{{surveyVars }}" -vm "{{vm}}" -userName '{{ ansible_user }}' -password '{{ ansible_password }}'
+    register: result
   
-  - name: "set fact pshell"
-    set_fact: 
-      destinationNetworks: "{{ pshellResult.stdout | trim }}"
+  - name: Process win_shell output
+    set_fact:
+      surveyVars: "{{ result.stdout | from_json }}"
   
-  - name: "the networks available for cluster '{{destinationCluster}}' are"
-    debug: var=destinationNetworks   
- 
- # Send desitination networks to pshell to get / set useable IP. -setReservation true or false will set reservation or just return ip info
- # NEED TO SETUP A CREDENTIAL FOR PROTEUS
-  - name: "Run script 'ansible_getBCIP_For_Reservation_Network.ps1'"
-    win_shell: D:\scripts\IPAM\ansible_getBCIP_For_Reservation_Network.ps1 -requestedSubnets '{{ destinationNetworks }}' -vmName  '{{ surveyVars.vmName }}' -userName '{{ ansible_user }}' -password '{{ ansible_password }}' -setReservation false
-    register: pshellResult
-  
-  - name: "set fact pshell"
-    set_fact: 
-      ipamResults: "{{ pshellResult.stdout | trim }}"
-  
-  - name: "the IPAM results are"
-    debug: var=ipamResults
-
-    #################################
-
-           
+  - name: "the survey Vars are"
+    debug: var=surveyVars
