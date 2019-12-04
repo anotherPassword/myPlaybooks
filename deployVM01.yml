@@ -22,6 +22,10 @@
       ansible_CL_Environment: "{{Environment}}"
       ansible_CL_Location: "{{Location}}"
       ansible_CL_SQL: "{{SQL}}"    
+    #overall status of gathering info for vm airbrake_deployment
+    buiidStatus:
+      clusterAssigned: ""
+      ipAssigned: ""
     #the template to build a VM with some defautl variables defined
     vm:
       annotation: This is a VM
