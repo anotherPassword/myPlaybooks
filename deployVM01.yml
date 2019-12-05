@@ -37,7 +37,7 @@
         existing_vm: 'False'
         dns_servers:
         - 10.7.200.95
-        - 10.130.200.95
+        - 10.130.200.95$$
         dns_suffix: bhcs.pvt
         domain: bhcs.pvt
         hostname: ''
@@ -139,3 +139,17 @@
   
   - name: "the survey Vars are"
     debug: var=surveyVars
+  ########
+  - name: "set pshellScriptAction to getIPReservationForNetwork"
+    set_fact:
+      pshellScriptAction: getIPReservationForNetwork
+  - name: "Run script 'ansible_deployVM.ps1' and get cluster based on Survey"
+    win_shell: D:\scripts\vSphere\ansible_deployVM.ps1 -pshellScriptAction "{{pshellScriptAction}}" -surveyVars "{{surveyVars }}" -vm "{{vm}}" -userName '{{ ansible_user }}' -password '{{ ansible_password }}'
+    register: result
+  
+  - name: Process win_shell output
+    set_fact:
+      surveyVars: "{{ result.stdout | from_json }}"
+  
+  - name: "the VM variable including Cluster Placement results are"
+    debug: var=vm
