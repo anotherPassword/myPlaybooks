@@ -37,7 +37,7 @@
         existing_vm: 'False'
         dns_servers:
         - 10.7.200.95
-        - 10.130.200.95$$
+        - 10.130.200.95
         dns_suffix: bhcs.pvt
         domain: bhcs.pvt
         hostname: ''
