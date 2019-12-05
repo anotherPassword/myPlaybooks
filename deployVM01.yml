@@ -151,5 +151,5 @@
     set_fact:
       surveyVars: "{{ result.stdout | from_json }}"
   
-  - name: "the VM variable including Cluster Placement results are"
-    debug: var=vm
+  - name: "the IPAM DEBUG survey Vars are"
+    debug: var=surveyVars
