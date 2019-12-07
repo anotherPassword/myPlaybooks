@@ -88,7 +88,7 @@
         scsi: ''
         version: ''
       is_template: ''
-      networkAdapters: {}
+      networkAdapters:
       state: present
       template: ''
       validate_certs: 'False'
