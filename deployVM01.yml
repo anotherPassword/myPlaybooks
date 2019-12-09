@@ -89,7 +89,7 @@
         version: ''
       is_template: ''
       networkAdapters:
-        test:
+        {}
       state: present
       template: ''
       validate_certs: 'False'
