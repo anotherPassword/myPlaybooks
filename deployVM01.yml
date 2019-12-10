@@ -46,7 +46,7 @@
         allow_guest_control: ''
     #the template to build a VM with some defautl variables defined
     vm:
-      annotation: This is a VM
+      annotation: 'This is a VM'
       cdrom:
         type: client
         iso_path: ''
@@ -89,7 +89,6 @@
         version: ''
       is_template: ''
       networkAdapters:
-        {}
       state: present
       template: ''
       validate_certs: 'False'
@@ -122,7 +121,7 @@
     set_fact:
       pshellScriptAction: getClusterBasedOnSurvey
   - name: "Run script 'ansible_deployVM.ps1' and get cluster based on Survey"
-    win_shell: D:\scripts\vSphere\ansible_deployVM.ps1 -pshellScriptAction "{{pshellScriptAction}}" -surveyVars "{{surveyVars }}" -userName '{{ ansible_user }}' -password '{{ ansible_password }}' -vm "{{vm }}" -networkAdapter "{{networkAdapter}}" -disk "{{disk}}" 
+    win_shell: D:\scripts\vSphere\ansible_deployVM.ps1 -pshellScriptAction "{{pshellScriptAction}}" -surveyVars "{{surveyVars }}" -userName '{{ ansible_user }}' -password '{{ ansible_password }}' -vm "{{vm}}" -networkAdapter "{{networkAdapter}}" -disk "{{disk}}" 
     register: result
   
   - name: Process win_shell output
