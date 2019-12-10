@@ -30,7 +30,7 @@
         type: thin
     # Network Adapter object
     networkAdapter:
-      - name: ""
+        name: ""
         vlan: ""
         device_type: vmxnet3
         mac: ""
