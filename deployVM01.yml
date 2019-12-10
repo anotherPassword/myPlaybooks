@@ -47,52 +47,7 @@
     #the template to build a VM with some defautl variables defined
     vm:
       annotation: This is a VM
-      cdrom:
-        type: client
-        iso_path: 
-        controller_type: 
-        state: 
-      cluster: 
-      convert: 
-      customization:
-        existing_vm: 'False'
-        dns_servers:
-        - 10.7.200.95
-        - 10.130.200.95
-        dns_suffix: bhcs.pvt
-        domain: bhcs.pvt
-        hostname: 
-        autologon: 
-        autologoncount: 
-        domainadmin: 
-        domainadminpassword: 
-        fullname: 
-        joindomain: 
-        joinworkgroup: 
-        orgname: BHCS
-        password: 
-        productid: 
-        runonce: 
-        timezone: 20
-      datacenter: 
-      disks:
-      folder: 
-      force: 
-      hardware:
-        hotadd_cpu: 'True'
-        hotremove_cpu: 
-        hotadd_memory: 'True'
-        memory_mb: 
-        num_cpus: 
-        num_cpu_cores_per_socket: 
-        scsi: 
-        version: 
-      is_template: 
-      networkAdapters:
-      state: present
-      template: 
-      validate_certs: 'False'
-      wait_for_customization: 
+
 
   tasks:
   # Some script to dump vars to pshell, which writes to txt file and returns some stuff
