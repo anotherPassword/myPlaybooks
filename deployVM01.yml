@@ -47,6 +47,11 @@
     #the template to build a VM with some defautl variables defined
     vm:
       annotation: This is a VM
+      cdrom:
+        type: client
+        iso_path: 
+        controller_type: 
+        state: 
 
 
   tasks:
