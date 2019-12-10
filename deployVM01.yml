@@ -52,7 +52,7 @@
         iso_path: ''
         controller_type: ''
         state: ''
-      cluster: ''
+      cluster: 
       convert: ''
       customization:
         existing_vm: 'False'
