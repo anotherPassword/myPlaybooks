@@ -147,7 +147,7 @@
   ########
   - name: "set pshellScriptAction to getIPReservationForNetworkAdapter"
     set_fact:
-      pshellScriptAction: getIPReservationForNetwork
+      pshellScriptAction: getIPReservationForNetworkAdapter
   - name: "Run script 'ansible_deployVM.ps1' and get cluster based on Survey"
     win_shell: D:\scripts\vSphere\ansible_deployVM.ps1 -pshellScriptAction "{{pshellScriptAction}}" -surveyVars "{{surveyVars }}" -userName '{{ ansible_user }}' -password '{{ ansible_password }}' -vm "{{vm }}" -networkAdapter "{{networkAdapter}}" -disk "{{disk}}" 
     register: result
