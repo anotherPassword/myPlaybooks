@@ -4,15 +4,15 @@
   hosts: all
   vars:
     #these are top level vars, can't populate 'surveyvars' as it is not top level?
-    vmName: ""
-    OS: ""
-    Application: ""
-    Tier: ""
-    Environment: ""
-    Location: ""
-    SQL: ""
+    vmName: 
+    OS: 
+    Application: 
+    Tier: 
+    Environment: 
+    Location: 
+    SQL: 
     #action pshell script will perform
-    pshellScriptAction: ""
+    pshellScriptAction: 
     #populate surveyVars with survey answers
     surveyVars:    
       ansible_VM_vmName: "{{vmName}}"
@@ -22,38 +22,38 @@
       ansible_CL_Environment: "{{Environment}}"
       ansible_CL_Location: "{{Location}}"
       ansible_CL_SQL: "{{SQL}}"
-      vcenter_CL_availableSubnets: ""
+      vcenter_CL_availableSubnets: 
     # Disk object
     disk:
-      - name: ''
-        size_gb: ''
+      - name: 
+        size_gb: 
         type: thin
     # Network Adapter object
     networkAdapter:
-      - name: ''
-        vlan: ''
-        device_type: ''
-        mac: ''
-        dvswitch_name: ''
-        start_connected: ''
-        type: ''
-        ip: ''
-        netmask: ''
-        gateway: ''
-        dns_servers: ''
-        domain: ''
-        wake_on_lan: ''
-        allow_guest_control: ''
+      - name: 
+        vlan: 
+        device_type: 
+        mac: 
+        dvswitch_name: 
+        start_connected: 
+        type: 
+        ip: 
+        netmask: 
+        gateway: 
+        dns_servers: 
+        domain: 
+        wake_on_lan: 
+        allow_guest_control: 
     #the template to build a VM with some defautl variables defined
     vm:
-      annotation: 'This is a VM'
+      annotation: This is a VM
       cdrom:
         type: client
-        iso_path: ''
-        controller_type: ''
-        state: ''
+        iso_path: 
+        controller_type: 
+        state: 
       cluster: 
-      convert: ''
+      convert: 
       customization:
         existing_vm: 'False'
         dns_servers:
@@ -61,38 +61,38 @@
         - 10.130.200.95
         dns_suffix: bhcs.pvt
         domain: bhcs.pvt
-        hostname: ''
-        autologon: ''
-        autologoncount: ''
-        domainadmin: ''
-        domainadminpassword: ''
-        fullname: ''
-        joindomain: ''
-        joinworkgroup: ''
+        hostname: 
+        autologon: 
+        autologoncount: 
+        domainadmin: 
+        domainadminpassword: 
+        fullname: 
+        joindomain: 
+        joinworkgroup: 
         orgname: BHCS
-        password: ''
-        productid: ''
-        runonce: ''
-        timezone: '20'
-      datacenter: ''
+        password: 
+        productid: 
+        runonce: 
+        timezone: 20
+      datacenter: 
       disks:
-      folder: ''
-      force: ''
+      folder: 
+      force: 
       hardware:
         hotadd_cpu: 'True'
-        hotremove_cpu: ''
+        hotremove_cpu: 
         hotadd_memory: 'True'
-        memory_mb: ''
-        num_cpus: ''
-        num_cpu_cores_per_socket: ''
-        scsi: ''
-        version: ''
-      is_template: ''
+        memory_mb: 
+        num_cpus: 
+        num_cpu_cores_per_socket: 
+        scsi: 
+        version: 
+      is_template: 
       networkAdapters:
       state: present
-      template: ''
+      template: 
       validate_certs: 'False'
-      wait_for_customization: 'yes'   
+      wait_for_customization: 'yes'
 
   tasks:
   # Some script to dump vars to pshell, which writes to txt file and returns some stuff
