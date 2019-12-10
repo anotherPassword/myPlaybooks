@@ -75,7 +75,7 @@
         runonce: ""
         timezone: '20'
       datacenter: ""
-      disks:
+      disks: ""
       folder: ""
       force: ""
       hardware:
