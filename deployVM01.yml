@@ -49,9 +49,9 @@
       annotation: This is a VM
       cdrom:
         type: client
-        iso_path: 
-        controller_type: 
-        state: 
+        iso_path: ""
+        controller_type: ""
+        state: ""
 
 
   tasks:
