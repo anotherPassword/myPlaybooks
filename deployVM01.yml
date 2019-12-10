@@ -92,7 +92,7 @@
       state: present
       template: 
       validate_certs: 'False'
-      wait_for_customization: 'yes'
+      wait_for_customization: 
 
   tasks:
   # Some script to dump vars to pshell, which writes to txt file and returns some stuff
@@ -100,7 +100,7 @@
   - name: "Run script '.ps1'"
     #Send dicts to powershell, they show up with u'*'. Powershell converts to json, 
     # then to pshell object for . notation, sets some values, sends back pure JSON
-    win_shell: D:\scripts\outputValues.ps1 -surveyVars "{{surveyVars }}" -vm "{{vm }}" #-userName '{{ ansible_user }}' -password '{{ ansible_password }}'
+    win_shell: D:\scripts\outputValues.ps1 -vm "{{vm}}" #-userName '{{ ansible_user }}' -password '{{ ansible_password }}'
     register: result
   - name: Process win_shell output
     set_fact:
