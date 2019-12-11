@@ -28,22 +28,24 @@
       - name: ""
         size_gb: ""
         type: thin
-    # Network Adapter object
-    networkAdapter:
-        name: ""
-        vlan: ""
-        device_type: vmxnet3
-        mac: ""
-        dvswitch_name: ""
-        start_connected: 'True'
-        type: static
-        ip: ""
-        netmask: ""
-        gateway: ""
-        dns_servers: ""
-        domain: bhcs.pvt
-        wake_on_lan: ""
-        allow_guest_control: ""
+    {
+    "networkAdapter": {
+        "name": "",
+        "vlan": "",
+        "device_type": "vmxnet3",
+        "mac": "",
+        "dvswitch_name": "",
+        "start_connected": "True",
+        "type": "static",
+        "ip": "",
+        "netmask": "",
+        "gateway": "",
+        "dns_servers": "",
+        "domain": "bhcs.pvt",
+        "wake_on_lan": "",
+        "allow_guest_control": ""
+      }
+    }
     
     #the template to build a VM with some defautl variables defined
     vm:
