@@ -44,6 +44,15 @@
         domain: bhcs.pvt
         wake_on_lan: ""
         allow_guest_control: ""
+    #JSON example
+    mrjson: {    
+        "cdrom": {
+        "type": "client",
+        "iso_path": "",
+        "controller_type": "",
+        "state": ""
+      }
+    }    
     #the template to build a VM with some defautl variables defined
     vm:
       annotation: This is a VM
