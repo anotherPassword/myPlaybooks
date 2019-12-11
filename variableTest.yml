@@ -3,6 +3,7 @@
 - name: "Variables Test"
   hosts: all
   vars:
+    test: ""
     #JSON example
     {
     "a_outer": {
