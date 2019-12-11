@@ -3,6 +3,15 @@
 - name: "Variables Test"
   hosts: localhost
   vars:
+        #JSON example
+    mrjson: {    
+        "cdrom": {
+        "type": "client",
+        "iso_path": "",
+        "controller_type": "",
+        "state": ""
+      }
+    }
     surveyVars:
       vmName: BSWANSBVMT01
       os: "Windows_Server_2016"
@@ -12,15 +21,16 @@
       location: "Main_Street"
       SQL: "no"
   tasks:
-    - set_fact:
-        #result_item: '{{ item.name }}-{{ item.port }}'
-        result_item: '{{ item.key }}:{{ item.value }}'
-      with_dict:
-        - '{{ surveyVars }}'
-      register: result_list
-
-    - set_fact:
-        result: '{{ result_list.results | map(attribute="ansible_facts.result_item") | join(",") }}'
-
-    - debug:
-        var: result
+  # Some script to dump vars to pshell, which writes to txt file and returns some stuff
+  # as a test of what we are getting back and forth from here to powershell and back
+  - name: "Run script 'outputValues.ps1'"
+  #  #Send dicts to powershell, they show up with u'*'. Powershell converts to json, 
+  #  # then to pshell object for . notation, sets some values, sends back pure JSON
+    win_shell: D:\scripts\outputValues.ps1 -surveyVars "{{surveyVars }}" -mrjson "{{mrjson}}" #-userName '{{ ansible_user }}' -password '{{ ansible_password }}'
+    register: result
+  - name: Process win_shell output
+    set_fact:
+      vm: "{{ result.stdout | from_json }}"
+  - name: Return Values
+    debug:
+      msg: "{{ vm }}"

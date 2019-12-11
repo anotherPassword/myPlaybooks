@@ -44,15 +44,7 @@
         domain: bhcs.pvt
         wake_on_lan: ""
         allow_guest_control: ""
-    #JSON example
-    mrjson: {    
-        "cdrom": {
-        "type": "client",
-        "iso_path": "",
-        "controller_type": "",
-        "state": ""
-      }
-    }    
+    
     #the template to build a VM with some defautl variables defined
     vm:
       annotation: This is a VM
@@ -104,26 +96,6 @@
       wait_for_customization: 'yes'   
 
   tasks:
-  # Some script to dump vars to pshell, which writes to txt file and returns some stuff
-  # as a test of what we are getting back and forth from here to powershell and back
-  #- name: "Run script '.ps1'"
-  #  #Send dicts to powershell, they show up with u'*'. Powershell converts to json, 
-  #  # then to pshell object for . notation, sets some values, sends back pure JSON
-  #  win_shell: D:\scripts\outputValues.ps1 -surveyVars "{{surveyVars }}" -vm "{{vm }}" #-userName '{{ ansible_user }}' -password '{{ ansible_password }}'
-  #  register: result
-  #- name: Process win_shell output
-  #  set_fact:
-  #    vm: "{{ result.stdout | from_json }}"
-  #- name: Return Values
-  #  debug:
-  #    msg: "{{ vm }}"
-
-#ORIGINAL FILE
-#deploy VM 1st try
-
-  #- name: 'set fact'
-  #  set_fact: 
-  #    pshellScriptAction: "getClusterBasedOnSurvey"
  
  ##########
   - name: "set pshellScriptAction to getClusterBasedOnSurvey"
