@@ -4,14 +4,6 @@
   hosts: localhost
   vars:
         #JSON example
-    mrjson: {    
-        "cdrom": {
-        "type": "client",
-        "iso_path": "",
-        "controller_type": "",
-        "state": ""
-      }
-    }
     surveyVars:
       vmName: BSWANSBVMT01
       os: "Windows_Server_2016"
@@ -26,7 +18,7 @@
   - name: "Run script 'outputValues.ps1'"
   #  #Send dicts to powershell, they show up with u'*'. Powershell converts to json, 
   #  # then to pshell object for . notation, sets some values, sends back pure JSON
-    win_shell: D:\scripts\outputValues.ps1 -surveyVars "{{surveyVars }}" -mrjson "{{mrjson}}" #-userName '{{ ansible_user }}' -password '{{ ansible_password }}'
+    win_shell: D:\scripts\outputValues.ps1 -surveyVars "{{surveyVars }}" #-mrjson "{{mrjson}}" #-userName '{{ ansible_user }}' -password '{{ ansible_password }}'
     register: result
   - name: Process win_shell output
     set_fact:
