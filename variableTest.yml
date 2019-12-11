@@ -3,14 +3,13 @@
 - name: "Variables Test"
   hosts: localhost
   vars:
-        #JSON example
-    mrjson: {    
-        "cdrom": {
-        "type": "client",
-        "iso_path": "",
-        "controller_type": "",
-        "state": ""
-      }
+    #JSON example
+    {
+    "an_int": 43,
+    "a_string": "some string",
+    "a_list": ["element_1","element_2"],
+    "a_dict": {"key1": "string-data",
+               "key2": 56}
     }
     surveyVars:
       vmName: BSWANSBVMT01
