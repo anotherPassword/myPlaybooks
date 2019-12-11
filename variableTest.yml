@@ -16,8 +16,26 @@
                 "key1": "string-data",
                 "key2": 56
                 }
-               }
+               },
+    "networkAdapter": {
+        "name": "",
+        "vlan": "",
+        "device_type": "vmxnet3",
+        "mac": "",
+        "dvswitch_name": "",
+        "start_connected": "True",
+        "type": "static",
+        "ip": "",
+        "netmask": "",
+        "gateway": "",
+        "dns_servers": "",
+        "domain": "bhcs.pvt",
+        "wake_on_lan": "",
+        "allow_guest_control": ""
+      }
     }
+
+    
     #surveyVars:
     #  vmName: BSWANSBVMT01
     #  os: "Windows_Server_2016"
