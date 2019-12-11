@@ -154,7 +154,7 @@
   
   - name: Process win_shell output
     set_fact:
-      surveyVars: "{{ result.stdout | from_json }}"
+      vmAdapter: "{{ result.stdout | from_json }}"
   
-  - name: "the IPAM DEBUG survey Vars are"
-    debug: var=surveyVars
+  - name: "the IPAM results are"
+    debug: var=vmAdapter
