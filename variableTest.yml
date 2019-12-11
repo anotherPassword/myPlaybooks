@@ -30,7 +30,7 @@
     register: result
   - name: Process win_shell output
     set_fact:
-      vm: "{{ result.stdout | from_json }}"
+      result: "{{ result.stdout | from_json }}"
   - name: Return Values
     debug:
-      msg: "{{ vm }}"
+      msg: "{{ result }}"
