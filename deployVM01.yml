@@ -3,6 +3,36 @@
 - name: Set Environment and Variables
   hosts: all
   vars:
+    {
+    "a_outer": {
+      "an_int": 43,
+      "a_string": "some string",
+      "a_list": [
+                "element_1",
+                "element_2"
+                ],
+      "a_dict": {
+                "key1": "string-data",
+                "key2": 56
+                }
+               },
+    "networkAdapter": {
+        "name": "",
+        "vlan": "",
+        "device_type": "vmxnet3",
+        "mac": "",
+        "dvswitch_name": "",
+        "start_connected": "True",
+        "type": "static",
+        "ip": "",
+        "netmask": "",
+        "gateway": "",
+        "dns_servers": "",
+        "domain": "bhcs.pvt",
+        "wake_on_lan": "",
+        "allow_guest_control": ""
+      }
+    }  
     #these are top level vars, can't populate 'surveyvars' as it is not top level?
     vmName: ""
     OS: ""
