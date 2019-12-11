@@ -1,11 +1,19 @@
 #Variables Test
 ---
 - name: "Variables Test"
-  hosts: all
+  hosts: localhost
   vars:
         #JSON example
+    mrjson: {    
+        "cdrom": {
+        "type": "client",
+        "iso_path": "",
+        "controller_type": "",
+        "state": ""
+      }
+    }
     surveyVars:
-      vmName: "BSWANSBVMT01"
+      vmName: BSWANSBVMT01
       os: "Windows_Server_2016"
       application: "Gen-pop"
       tier: "1"
@@ -15,10 +23,10 @@
   tasks:
   # Some script to dump vars to pshell, which writes to txt file and returns some stuff
   # as a test of what we are getting back and forth from here to powershell and back
-  - name: "Run script "
+  - name: "Run script 'outputValues.ps1'"
   #  #Send dicts to powershell, they show up with u'*'. Powershell converts to json, 
   #  # then to pshell object for . notation, sets some values, sends back pure JSON
-    win_shell: D:\scripts\outputValues.ps1 -surveyVars "{{surveyVars}}" #-mrjson "{{mrjson}}" #-userName '{{ ansible_user }}' -password '{{ ansible_password }}'
+    win_shell: D:\scripts\outputValues.ps1 -surveyVars "{{surveyVars }}" -mrjson "{{mrjson}}" #-userName '{{ ansible_user }}' -password '{{ ansible_password }}'
     register: result
   - name: Process win_shell output
     set_fact:
