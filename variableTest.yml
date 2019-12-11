@@ -1,7 +1,7 @@
 #Variables Test
 ---
 - name: "Variables Test"
-  hosts: localhost
+  hosts: all
   vars:
     #JSON example
     {
