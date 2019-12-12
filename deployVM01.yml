@@ -3,7 +3,6 @@
 - name: Set Environment and Variables
   hosts: all
   vars:
-  
     #these are top level vars, can't populate 'surveyvars' as it is not top level?
     {
       "vmName": "",
@@ -94,7 +93,7 @@
             "version": ""
           },
           "is_template": "",
-          "networkAdapters": "",
+          "networkAdapters": [],
           "state": "present",
           "template": "",
           "validate_certs": "False",
@@ -136,13 +135,13 @@
   - name: "set pshellScriptAction to getIPReservationForNetworkAdapter"
     set_fact:
       pshellScriptAction: getIPReservationForNetworkAdapter
-  - name: "Run script 'ansible_deployVM.ps1' and get cluster based on Survey"
+  - name: "Run script 'ansible_deployVM.ps1' get IP reservation"
     win_shell: D:\scripts\vSphere\ansible_deployVM.ps1 -pshellScriptAction "{{pshellScriptAction}}" -surveyVars "{{surveyVars }}" -userName '{{ ansible_user }}' -password '{{ ansible_password }}' -vm "{{vm }}" -networkAdapter "{{networkAdapter}}" -disk "{{disk}}" 
     register: result
   
-  - name: Process win_shell output
+  - name: Process win_shell output ipam
     set_fact:
-      vmAdapter: "{{ result.stdout | from_json }}"
+      vm: "{{ result.stdout | from_json }}"
   
-  - name: "the IPAM results are"
-    debug: var=vmAdapter
+  - name: "vm with attache adapter IS"
+    debug: var=vm
