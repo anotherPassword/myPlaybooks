@@ -4,8 +4,8 @@
   hosts: all
   vars:
   vars_files:
-  - surveyVars.yml
-  - vars.yml
+  - /vars/surveyVars.yml
+  - /vars/vars.yml
  
   tasks:
 
