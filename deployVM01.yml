@@ -1,13 +1,13 @@
 #powershell variables test
 ---
-- name: "Include Vars"
-  vars_files: 
-    - vars.yml
-
 - name: Set Environment and Variables
   hosts: all
 
+ 
   tasks:
+  - name: "Include Vars"
+    include_vars: 
+    - vars.yml
  
  ##########
   - name: "set pshellScriptAction to getClusterBasedOnSurvey"
