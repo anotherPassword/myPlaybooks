@@ -1,9 +1,10 @@
 #surveyVars
-    "vmName": ""
-    "OS": ""
-    "Application": ""
-    "Tier": ""
-    "Environment": ""
-    "Location": ""
-    "SQL": ""
-    "pshellScriptAction": ""
+    surveyVars:
+      vmName: ""
+      OS: ""
+      Application: ""
+      Tier: ""
+      Environment: ""
+      Location: ""
+      SQL: ""
+      pshellScriptAction: ""
