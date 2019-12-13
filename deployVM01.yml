@@ -1,6 +1,9 @@
 #powershell variables test
 ---
-- include_vars: vars.yml
+- name: "Include Vars"
+  include_vars: 
+    file: vars.yml
+
 - name: Set Environment and Variables
   hosts: all
 
