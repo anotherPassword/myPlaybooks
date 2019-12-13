@@ -5,7 +5,7 @@
   vars:
   vars_files:
   - vars/surveyVars.yml
-  - /vars/vars.yml
+  - vars/vars.yml
  
   tasks:
 
