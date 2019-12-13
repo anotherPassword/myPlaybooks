@@ -1,23 +1,5 @@
 ---
     {
-      "vmName": "",
-      "OS": "",
-      "Application": "",
-      "Tier": "",
-      "Environment": "",
-      "Location": "",
-      "SQL": "",
-      "pshellScriptAction": "",
-      "surveyVars": {
-          "ansible_VM_vmName": "{{vmName}}",
-          "ansible_CL_OS": "{{OS}}",
-          "ansible_CL_Application": "{{Application}}",
-          "ansible_CL_Tier": "{{Tier}}",
-          "ansible_CL_Environment": "{{Environment}}",
-          "ansible_CL_Location": "{{Location}}",
-          "ansible_CL_SQL": "{{SQL}}",
-          "vcenter_CL_availableSubnets": ""
-      },
       "disk": [
           {
             "name": "",
