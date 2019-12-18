@@ -1,4 +1,5 @@
 #surveyVars
+#this is in YAML, to try mixing this and JSON from vm, it works
     surveyVars:
       vmName: ""
       OS: ""
