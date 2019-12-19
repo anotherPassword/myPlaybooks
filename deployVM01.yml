@@ -29,7 +29,10 @@
   - vars/vars.yml
  
   tasks:
-
+ 
+  - name: "surveyVars are ------------------"
+    debug: var=surveyVars
+  - meta: end_play
  ########## GET CLUSTER BASED ON SURVEY
   - name: "set pshellScriptAction to getClusterBasedOnSurvey"
     set_fact:
