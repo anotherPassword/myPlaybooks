@@ -25,7 +25,7 @@
       #END set surveyVars #########
 
   vars_files:
-  - vars/surveyVars.yml
+  #- vars/surveyVars.yml
   - vars/vars.yml
  
   tasks:
