@@ -13,7 +13,17 @@
     Location: ""
     SQL: ""
     #END vars from survey ##########
-    
+    #set surveyVars to vars from survey to be able to pass to powershell
+    surveyVars:    
+      a_vmName: "{{vmName}}"
+      a_OS: "{{OS}}"
+      a_Application: "{{Application}}"
+      a_Tier: "{{Tier}}"
+      a_Environment: "{{Environment}}"
+      a_Location: "{{Location}}"
+      a_SQL: "{{SQL}}"
+      #END set surveyVars #########
+
   vars_files:
   - vars/surveyVars.yml
   - vars/vars.yml
