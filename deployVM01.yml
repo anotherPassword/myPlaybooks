@@ -3,6 +3,17 @@
 - name: Set Environment and Variables
   hosts: all
   vars:
+    pshellScriptAction: ""
+    #vars from survey ###########
+    vmName: ""
+    OS: ""
+    Application: ""
+    Tier: ""
+    Environment: ""
+    Location: ""
+    SQL: ""
+    #END vars from survey ##########
+    
   vars_files:
   - vars/surveyVars.yml
   - vars/vars.yml
@@ -27,7 +38,7 @@
   - name: "set pshellScriptAction to getNetworksForCluster"
     set_fact:
       pshellScriptAction: getNetworksForCluster
-  - name: "Run script 'ansible_deployVM.ps1' and GET NETWORS FOR CLUSTER"
+  - name: "Run script 'ansible_deployVM.ps1' and GET NETWORKS FOR CLUSTER"
     win_shell: D:\scripts\vSphere\ansible_deployVM.ps1 -pshellScriptAction "{{pshellScriptAction}}" -surveyVars "{{surveyVars }}" -userName '{{ ansible_user }}' -password '{{ ansible_password }}' -vm "{{vm }}" -networkAdapter "{{networkAdapter}}" -disk "{{disk}}" 
     register: result
   

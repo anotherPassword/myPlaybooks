@@ -1,11 +1,11 @@
 #surveyVars
 #this is in YAML, to try mixing this and JSON from vm, it works
     surveyVars:
-      vmName: ""
-      OS: ""
-      Application: ""
-      Tier: ""
-      Environment: ""
-      Location: ""
-      SQL: ""
-      pshellScriptAction: ""
+      a_vmName: ""
+      a_OS: ""
+      a_Application: ""
+      a_Tier: ""
+      a_Environment: ""
+      a_Location: ""
+      a_SQL: ""
+
