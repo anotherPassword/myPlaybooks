@@ -22,7 +22,7 @@
       a_Environment: "{{Environment}}"
       a_Location: "{{Location}}"
       a_SQL: "{{SQL}}"
-      a_vcenter_CL_availableSubnets: 
+      a_vcenter_CL_availableSubnets: ""
       #END set surveyVars #########
 
   vars_files:
