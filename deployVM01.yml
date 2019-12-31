@@ -35,7 +35,7 @@
  ########## GET CLUSTER BASED ON SURVEY
   - name: "set pshellScriptAction to getClusterBasedOnSurvey"
     set_fact:
-      pshellScriptAction: "{{'getClusterBasedOnSurvey' | to_json }}"
+      pshellScriptAction: getClusterBasedOnSurvey
 
   - name: "Run script 'ansible_deployVM.ps1'"
     win_shell: D:\scripts\vSphere\ansible_deployVM.ps1 -pshellScriptAction "{{pshellScriptAction}}" -surveyVars "{{surveyVars }}" -userName '{{ ansible_user }}' -password '{{ ansible_password }}' -vm "{{vm }}" -networkAdapter "{{networkAdapter}}" -disk "{{disk}}" 
@@ -47,7 +47,7 @@
   
   - name: "The VM variable including Cluster Placement results are"
     debug: var=vm
-  #- meta: end_play
+  - meta: end_play
 
   ######### GET NETWORKS FOR CLUSTER
   - name: "set pshellScriptAction to getNetworksForCluster"
