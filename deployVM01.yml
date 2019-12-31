@@ -2,9 +2,8 @@
 ---
 - name: Set Environment and Variables
   hosts: all
-  vars:
-    pshellScriptAction: ""
-    #vars from survey ###########
+  vars: 
+    #vars from survey have to be root level vars ###########
     vmName: ""
     OS: ""
     Application: ""
@@ -13,7 +12,7 @@
     Location: ""
     SQL: ""
     #END vars from survey ##########
-    #set surveyVars to vars from survey to be able to pass to powershell
+    #set surveyVars to vars from survey to be able to pass to powershell ie JSON 
     surveyVars:    
       a_vmName: "{{vmName}}"
       a_OS: "{{OS}}"
@@ -33,15 +32,15 @@
 
   tasks:
  
-  - name: "surveyVars are --------------------"
+  - name: "------     surveyVars are --------------------"
     debug: var=surveyVars
   #- meta: end_play
  ########## GET CLUSTER BASED ON SURVEY
   - name: "set pshellScriptAction to getClusterBasedOnSurvey"
     set_fact:
-      pshellScriptAction: getClusterBasedOnSurvey
+      scriptAction.action: getClusterBasedOnSurvey
   - name: "Run script 'ansible_deployVM.ps1' GET CLUSTER BASED ON SURVEY"
-    win_shell: D:\scripts\vSphere\ansible_deployVM.ps1 -pshellScriptAction "{{pshellScriptAction}}" -surveyVars "{{surveyVars }}" -userName '{{ ansible_user }}' -password '{{ ansible_password }}' -vm "{{vm }}" -networkAdapter "{{networkAdapter}}" -disk "{{disk}}" 
+    win_shell: D:\scripts\vSphere\ansible_deployVM.ps1 -scriptAction "{{scriptAction}}" -surveyVars "{{surveyVars }}" -userName '{{ ansible_user }}' -password '{{ ansible_password }}' -vm "{{vm }}" -networkAdapter "{{networkAdapter}}" -disk "{{disk}}" 
     register: result
   
   - name: Process win_shell output

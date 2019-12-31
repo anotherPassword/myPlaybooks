@@ -1,5 +1,8 @@
 ---
     {
+      "scriptAction": {
+        "action": ""
+      },
       "disk": [
           {
             "name": "",
