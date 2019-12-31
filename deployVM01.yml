@@ -21,76 +21,74 @@
       a_Environment: "{{Environment}}"
       a_Location: "{{Location}}"
       a_SQL: "{{SQL}}"
-      a_vcenter_CL_availableSubnets: 
+      a_vcenter_CL_availableSubnets: ""
       #END set surveyVars #########
 
   vars_files:
   #- vars/surveyVars.yml
   - vars/vars.yml
  
-
-
   tasks:
- 
-  - name: "------     surveyVars are --------------------"
+  - name: "------ surveyVars are --------------------"
     debug: var=surveyVars
   #- meta: end_play
  ########## GET CLUSTER BASED ON SURVEY
   - name: "set pshellScriptAction to getClusterBasedOnSurvey"
     set_fact:
-      pshellScriptAction: "{'getNetworksForCluster' | to_json }"
-  - name: "Run script 'ansible_deployVM.ps1' GET CLUSTER BASED ON SURVEY"
+      pshellScriptAction: "{'getClusterBasedOnSurvey' | to_json }"
+
+  - name: "Run script 'ansible_deployVM.ps1'"
     win_shell: D:\scripts\vSphere\ansible_deployVM.ps1 -scriptAction "{{scriptAction}}" -surveyVars "{{surveyVars }}" -userName '{{ ansible_user }}' -password '{{ ansible_password }}' -vm "{{vm }}" -networkAdapter "{{networkAdapter}}" -disk "{{disk}}" 
     register: result
   
-  - name: Process win_shell output
+  - name: "Process win_shell output"
     set_fact:
       vm: "{{ result.stdout | from_json }}"
   
-  - name: "the VM variable including Cluster Placement results are"
+  - name: "The VM variable including Cluster Placement results are"
     debug: var=vm
-  - meta: end_play
+  #- meta: end_play
 
   ######### GET NETWORKS FOR CLUSTER
   - name: "set pshellScriptAction to getNetworksForCluster"
     set_fact:
-      pshellScriptAction: getNetworksForCluster
+      pshellScriptAction: "{'getNetworksForCluster' | to_json }"    
   - name: "Run script 'ansible_deployVM.ps1' and GET NETWORKS FOR CLUSTER"
     win_shell: D:\scripts\vSphere\ansible_deployVM.ps1 -pshellScriptAction "{{pshellScriptAction}}" -surveyVars "{{surveyVars }}" -userName '{{ ansible_user }}' -password '{{ ansible_password }}' -vm "{{vm }}" -networkAdapter "{{networkAdapter}}" -disk "{{disk}}" 
     register: result
   
-  - name: Process win_shell output
+  - name: 
     set_fact:
       surveyVars: "{{ result.stdout | from_json }}"
   
-  - name: "The survey Vars are ========="
+  - name: "The surveyVars varialbe inclding networks available"
     debug: var=surveyVars
 
   ######## GET IP RESERVATION FOR NETWORK ADAPTER
   - name: "set pshellScriptAction to getIPReservationForNetworkAdapter"
     set_fact:
-      pshellScriptAction: getIPReservationForNetworkAdapter
-  - name: "Run script 'ansible_deployVM.ps1' GET IP AND SET IPAM RESERVATION FOR NETWORK ADAPTER"
+      pshellScriptAction: "{'getIPReservationForNetworkAdapter' | to_json }"      
+  - name: "Run script 'ansible_deployVM.ps1'"
     win_shell: D:\scripts\vSphere\ansible_deployVM.ps1 -pshellScriptAction "{{pshellScriptAction}}" -surveyVars "{{surveyVars }}" -userName '{{ ansible_user }}' -password '{{ ansible_password }}' -vm "{{vm }}" -networkAdapter "{{networkAdapter}}" -disk "{{disk}}" 
     register: result
   
-  - name: Process win_shell output ipam
+  - name: "Process win_shell output"
     set_fact:
       vm: "{{ result.stdout | from_json }}"
   
-  - name: "vm with attache adapter IS"
+  - name: "The vm variable with attached adapter"
     debug: var=vm
    ######## 
   - name: "set pshellScriptAction to getVMTemplate"
     set_fact:
-      pshellScriptAction: getIPReservationForNetworkAdapter
-  - name: "Run script 'ansible_deployVM.ps1' GET VM TEMPLATES FOR CLUSTER"
+      pshellScriptAction: "{'getIPReservationForNetworkAdapter' | to_json }"       
+  - name: "Run script 'ansible_deployVM.ps1'"
     win_shell: D:\scripts\vSphere\ansible_deployVM.ps1 -pshellScriptAction "{{pshellScriptAction}}" -surveyVars "{{surveyVars }}" -userName '{{ ansible_user }}' -password '{{ ansible_password }}' -vm "{{vm }}" -networkAdapter "{{networkAdapter}}" -disk "{{disk}}" 
     register: result
   
-  - name: Process win_shell output ipam
+  - name: "Process win_shell output"
     set_fact:
       vm: "{{ result.stdout | from_json }}"
   
-  - name: "vm with attache adapter IS"
+  - name: "The vm variable with attached template is"
     debug: var=vm   
