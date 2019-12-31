@@ -35,7 +35,7 @@
  ########## GET CLUSTER BASED ON SURVEY
   - name: "set pshellScriptAction to getClusterBasedOnSurvey"
     set_fact:
-      pshellScriptAction: "{'getClusterBasedOnSurvey' | to_json }"
+      pshellScriptAction: "{{'getClusterBasedOnSurvey' | to_json }}"
 
   - name: "Run script 'ansible_deployVM.ps1'"
     win_shell: D:\scripts\vSphere\ansible_deployVM.ps1 -scriptAction "{{scriptAction}}" -surveyVars "{{surveyVars }}" -userName '{{ ansible_user }}' -password '{{ ansible_password }}' -vm "{{vm }}" -networkAdapter "{{networkAdapter}}" -disk "{{disk}}" 
@@ -52,7 +52,7 @@
   ######### GET NETWORKS FOR CLUSTER
   - name: "set pshellScriptAction to getNetworksForCluster"
     set_fact:
-      pshellScriptAction: "{'getNetworksForCluster' | to_json }"    
+      pshellScriptAction: "{{'getNetworksForCluster' | to_json }}"    
   - name: "Run script 'ansible_deployVM.ps1' and GET NETWORKS FOR CLUSTER"
     win_shell: D:\scripts\vSphere\ansible_deployVM.ps1 -pshellScriptAction "{{pshellScriptAction}}" -surveyVars "{{surveyVars }}" -userName '{{ ansible_user }}' -password '{{ ansible_password }}' -vm "{{vm }}" -networkAdapter "{{networkAdapter}}" -disk "{{disk}}" 
     register: result
@@ -67,7 +67,7 @@
   ######## GET IP RESERVATION FOR NETWORK ADAPTER
   - name: "set pshellScriptAction to getIPReservationForNetworkAdapter"
     set_fact:
-      pshellScriptAction: "{'getIPReservationForNetworkAdapter' | to_json }"      
+      pshellScriptAction: "{{'getIPReservationForNetworkAdapter' | to_json }}"      
   - name: "Run script 'ansible_deployVM.ps1'"
     win_shell: D:\scripts\vSphere\ansible_deployVM.ps1 -pshellScriptAction "{{pshellScriptAction}}" -surveyVars "{{surveyVars }}" -userName '{{ ansible_user }}' -password '{{ ansible_password }}' -vm "{{vm }}" -networkAdapter "{{networkAdapter}}" -disk "{{disk}}" 
     register: result
@@ -81,7 +81,7 @@
    ######## 
   - name: "set pshellScriptAction to getVMTemplate"
     set_fact:
-      pshellScriptAction: "{'getIPReservationForNetworkAdapter' | to_json }"       
+      pshellScriptAction: "{{'getIPReservationForNetworkAdapter' | to_json }}"       
   - name: "Run script 'ansible_deployVM.ps1'"
     win_shell: D:\scripts\vSphere\ansible_deployVM.ps1 -pshellScriptAction "{{pshellScriptAction}}" -surveyVars "{{surveyVars }}" -userName '{{ ansible_user }}' -password '{{ ansible_password }}' -vm "{{vm }}" -networkAdapter "{{networkAdapter}}" -disk "{{disk}}" 
     register: result
