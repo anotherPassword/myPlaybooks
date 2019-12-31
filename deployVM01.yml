@@ -29,9 +29,11 @@
   #- vars/surveyVars.yml
   - vars/vars.yml
  
+
+
   tasks:
  
-  - name: "surveyVars are ------------------"
+  - name: "surveyVars are --------------------"
     debug: var=surveyVars
   #- meta: end_play
  ########## GET CLUSTER BASED ON SURVEY
