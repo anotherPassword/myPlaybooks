@@ -63,7 +63,7 @@
   
   - name: "The surveyVars varialbe inclding networks available"
     debug: var=surveyVars
-  - meta: end_play
+  #- meta: end_play
   
   ######## GET IP RESERVATION FOR NETWORK ADAPTER
   - name: "set pshellScriptAction to getIPReservationForNetworkAdapter"
@@ -79,7 +79,7 @@
   
   - name: "The vm variable with attached adapter"
     debug: var=vm
-   
+  - meta: end_play   
    ######## 
   - name: "set pshellScriptAction to getVMTemplate"
     set_fact:
