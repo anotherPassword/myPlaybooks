@@ -47,7 +47,7 @@
   
   - name: "The VM variable including Cluster Placement results are"
     debug: var=vm
-  - meta: end_play
+  #- meta: end_play
 
   ######### GET NETWORKS FOR CLUSTER
   - name: "set pshellScriptAction to getNetworksForCluster"
@@ -63,7 +63,8 @@
   
   - name: "The surveyVars varialbe inclding networks available"
     debug: var=surveyVars
-
+  - meta: end_play
+  
   ######## GET IP RESERVATION FOR NETWORK ADAPTER
   - name: "set pshellScriptAction to getIPReservationForNetworkAdapter"
     set_fact:
@@ -78,6 +79,7 @@
   
   - name: "The vm variable with attached adapter"
     debug: var=vm
+   
    ######## 
   - name: "set pshellScriptAction to getVMTemplate"
     set_fact:
