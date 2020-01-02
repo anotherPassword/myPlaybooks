@@ -6,6 +6,7 @@
     #vars from survey have to be root level vars ###########
     vmName: ""
     OS: ""
+    OS_Version:
     Application: ""
     Tier: ""
     Environment: ""
@@ -16,6 +17,7 @@
     surveyVars:    
       a_vmName: "{{vmName}}"
       a_OS: "{{OS}}"
+      a_OS_Version: "{{OS_Version}}"
       a_Application: "{{Application}}"
       a_Tier: "{{Tier}}"
       a_Environment: "{{Environment}}"
