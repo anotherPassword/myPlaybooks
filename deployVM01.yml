@@ -6,7 +6,7 @@
     #vars from survey have to be root level vars ###########
     vmName: ""
     OS: ""
-    OS_Version:
+    OS_Version: ""
     Application: ""
     Tier: ""
     Environment: ""
