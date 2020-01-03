@@ -24,6 +24,7 @@
       a_Location: "{{Location}}"
       a_SQL: "{{SQL}}"
       a_vcenter_CL_availableSubnets: ""
+
       #END set surveyVars #########
 
   vars_files:
@@ -95,4 +96,24 @@
       vm: "{{ result.stdout | from_json }}"
   
   - name: "The vm variable with attached template is"
-    debug: var=vm   
+    debug: var=vm
+
+   ######## 
+  - name: "set pshellScriptAction to getVMTemplate"
+    set_fact:
+      pshellScriptAction: getDatacenterForVM      
+  - name: "Run script 'ansible_deployVM.ps1'"
+    win_shell: D:\scripts\vSphere\ansible_deployVM.ps1 -pshellScriptAction "{{pshellScriptAction}}" -surveyVars "{{surveyVars }}" -userName '{{ ansible_user }}' -password '{{ ansible_password }}' -vm "{{vm }}" -networkAdapter "{{networkAdapter}}" -disk "{{disk}}" 
+    register: result
+  
+
+  - name: "Process win_shell output"
+    set_fact:
+      vm: "{{ result.stdout | from_json }}"
+  
+  - name: "The vm variable with attached Datacenter is"
+    debug: var=vm
+  #########
+
+#  - name: Create a virtual machine on given ESXi hostname
+#    vmware_guest:
