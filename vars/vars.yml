@@ -58,6 +58,7 @@
             "timezone": "20"
           },
           "datacenter": "",
+          "datastore": "",
           "disks": "",
           "folder": "",
           "force": "",
