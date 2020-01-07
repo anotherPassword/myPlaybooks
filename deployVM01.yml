@@ -37,7 +37,7 @@
   tasks:
   - name: "------ surveyVars are --------------------"
     debug: var=surveyVars
-  - meta: end_play
+  #- meta: end_play
  ########## GET CLUSTER BASED ON SURVEY
   - name: "set pshellScriptAction to getClusterBasedOnSurvey"
     set_fact:
@@ -102,7 +102,7 @@
   - name: "The vm variable with attached adapter"
     debug: var=vm
   #- meta: end_play   
-   ######## 
+   ######## GET TEMPLATE FOR CLUSTER
   - name: "set pshellScriptAction to getVMTemplate"
     set_fact:
       pshellScriptAction: getVMTemplatesForCluster      
@@ -116,7 +116,7 @@
   
   - name: "The vm variable with attached template is"
     debug: var=vm
-   ######## 
+   ######## GET DATACENTER FOR VM
   - name: "set pshellScriptAction to getDatacenterForVM "
     set_fact:
       pshellScriptAction: getDatacenterForVM      
@@ -131,7 +131,35 @@
   
   - name: "The vm variable with attached Datacenter is"
     debug: var=vm
-  #########
+  ######### CREATE VM FROM TEMPLATE (based on vm JSON)
 
-#  - name: Create a virtual machine on given ESXi hostname
-#    vmware_guest:
+  - name: "Create VM from template"
+    vmware_guest:
+      hostname: "{{ vcenter_hostname }}"
+      username: "{{ vcenter_username }}"
+      password: "{{ vcenter_password }}"    
+      validate_certs: no
+      wait_for_customization: no
+      #folder: "{{ vmFolder }}"
+      datacenter: "{{ vm.datacenter }}"
+      name: "{{ surveyVars.a_vmName }}"
+      template: "{{ vm.template }}"
+      cluster: "{{ vm.cluster }}"
+      datastore: "{{ vm.datastore }}"
+      hardware:
+        memory_mb: 4096
+        num_cpus: 2
+      cdrom:
+        type: "{{ vm.cdrom.type }}"
+      networks:
+      - name: 'VM Network'
+        device_type:  "{{ vm.networkAdapters[0].device_type }}" 
+        ip: "{{ vm.networkAdapters[0].ip }}"
+        netmask: "{{ vm.networkAdapters[0].netmask }}"
+        gateway: "{{ vm.networkAdapters[0].gateway }}"
+        type: "{{ vm.networkAdapters[0].type }}"
+        domain: "{{ vm.networkAdapters[0].domain }}"
+        start_connected:  "{{ vm.networkAdapters[0].start_connected }}"
+      wait_for_ip_address: False
+      state: present
+    register: newvm
