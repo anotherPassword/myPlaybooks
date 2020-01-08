@@ -38,106 +38,14 @@
   - name: "------ surveyVars are --------------------"
     debug: var=surveyVars
   #- meta: end_play
- ########## GET CLUSTER BASED ON SURVEY
-  - name: "set pshellScriptAction to getClusterBasedOnSurvey"
-    set_fact:
-      pshellScriptAction: getClusterBasedOnSurvey #not sent as JSON with unicode
 
-  - name: "Run script 'ansible_deployVM.ps1'"
-    win_shell: D:\scripts\vSphere\ansible_deployVM.ps1 -pshellScriptAction "{{pshellScriptAction}}" -surveyVars "{{surveyVars }}" -userName '{{ ansible_user }}' -password '{{ ansible_password }}' -vm "{{vm }}" -networkAdapter "{{networkAdapter}}" -disk "{{disk}}" 
-    register: result
-  
-  - name: "Process win_shell output"
-    set_fact:
-      vm: "{{ result.stdout | from_json }}"
-  
-  - name: "The VM variable including Cluster Placement results are"
-    debug: var=vm
-  #- meta: end_play
- 
-  ######### GET NETWORKS FOR CLUSTER
-  - name: "set pshellScriptAction to getNetworksForCluster"
-    set_fact:
-      pshellScriptAction: getNetworksForCluster   #not sent as JSON with unicode
-  - name: "Run script 'ansible_deployVM.ps1' and GET NETWORKS FOR CLUSTER"
-    win_shell: D:\scripts\vSphere\ansible_deployVM.ps1 -pshellScriptAction "{{pshellScriptAction}}" -surveyVars "{{surveyVars }}" -userName '{{ ansible_user }}' -password '{{ ansible_password }}' -vm "{{vm }}" -networkAdapter "{{networkAdapter}}" -disk "{{disk}}" 
-    register: result
-  
-  - name: 
-    set_fact:
-      surveyVars: "{{ result.stdout | from_json }}"
-  
-  - name: "The surveyVars varialbe inclding networks available"
-    debug: var=surveyVars
-  #- meta: end_play
-
-  ######### GET DATASTORE FOR CLUSTER
-  - name: "set pshellScriptAction to getDatastoreForCluster"
-    set_fact:
-      pshellScriptAction: getDatastoreForCluster   #not sent as JSON with unicode
-  - name: "Run script 'ansible_deployVM.ps1' and GET NETWORKS FOR CLUSTER"
-    win_shell: D:\scripts\vSphere\ansible_deployVM.ps1 -pshellScriptAction "{{pshellScriptAction}}" -surveyVars "{{surveyVars }}" -userName '{{ ansible_user }}' -password '{{ ansible_password }}' -vm "{{vm }}" -networkAdapter "{{networkAdapter}}" -disk "{{disk}}" 
-    register: result
-  
-  - name: "Process win_shell output"
-    set_fact:
-      vm: "{{ result.stdout | from_json }}"
-  
-  - name: "The vm variable with attached adapter"
-    debug: var=vm
-  #- meta: end_play
-  
-  ######## GET IP RESERVATION FOR NETWORK ADAPTER
-  - name: "set pshellScriptAction to getIPReservationForNetworkAdapter"
-    set_fact:
-      pshellScriptAction: getIPReservationForNetworkAdapter      #not sent as JSON with unicode
-  - name: "Run script 'ansible_deployVM.ps1'"
-    win_shell: D:\scripts\vSphere\ansible_deployVM.ps1 -pshellScriptAction "{{pshellScriptAction}}" -surveyVars "{{surveyVars }}" -userName '{{ ansible_user }}' -password '{{ ansible_password }}' -vm "{{vm }}" -networkAdapter "{{networkAdapter}}" -disk "{{disk}}" 
-    register: result
-  
-  - name: "Process win_shell output"
-    set_fact:
-      vm: "{{ result.stdout | from_json }}"
-  
-  - name: "The vm variable with attached adapter"
-    debug: var=vm
-  #- meta: end_play   
-   ######## GET TEMPLATE FOR CLUSTER
-  - name: "set pshellScriptAction to getVMTemplate"
-    set_fact:
-      pshellScriptAction: getVMTemplatesForCluster      
-  - name: "Run script 'ansible_deployVM.ps1'"
-    win_shell: D:\scripts\vSphere\ansible_deployVM.ps1 -pshellScriptAction "{{pshellScriptAction}}" -surveyVars "{{surveyVars }}" -userName '{{ ansible_user }}' -password '{{ ansible_password }}' -vm "{{vm }}" -networkAdapter "{{networkAdapter}}" -disk "{{disk}}" 
-    register: result
-  
-  - name: "Process win_shell output"
-    set_fact:
-      vm: "{{ result.stdout | from_json }}"
-  
-  - name: "The vm variable with attached template is"
-    debug: var=vm
-   ######## GET DATACENTER FOR VM
-  - name: "set pshellScriptAction to getDatacenterForVM "
-    set_fact:
-      pshellScriptAction: getDatacenterForVM      
-  - name: "Run script 'ansible_deployVM.ps1'"
-    win_shell: D:\scripts\vSphere\ansible_deployVM.ps1 -pshellScriptAction "{{pshellScriptAction}}" -surveyVars "{{surveyVars }}" -userName '{{ ansible_user }}' -password '{{ ansible_password }}' -vm "{{vm }}" -networkAdapter "{{networkAdapter}}" -disk "{{disk}}" 
-    register: result
-  
-
-  - name: "Process win_shell output"
-    set_fact:
-      vm: "{{ result.stdout | from_json }}"
-  
-  - name: "The vm variable with attached Datacenter is"
-    debug: var=vm
   ######### CREATE VM FROM TEMPLATE (based on vm JSON)
 
   - name: "Create VM from template"
     vmware_guest:
-      hostname: "{{ vcenter_hostname }}"
-      username: "{{ vcenter_username }}"
-      password: "{{ vcenter_password }}"    
+      hostname: "{{ VMWARE_HOST }}"
+      username: "{{ VMWARE_USER }}"
+      password: "{{ VMWARE_PASSWORD }}"    
       validate_certs: no
       wait_for_customization: no
       #folder: "{{ vmFolder }}"
