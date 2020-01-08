@@ -1,0 +1,32 @@
+###### Create VM from surveyVars
+
+- name: "Create VM from template"
+  vmware_guest:
+    hostname: "{{ VMWARE_HOST }}"
+    username: "{{ VMWARE_USER }}"
+    password: "{{ VMWARE_PASSWORD }}"    
+    validate_certs: no
+    wait_for_customization: no
+    #folder: "{{ vmFolder }}"
+    datacenter: "{{ vm.datacenter }}"
+    name: "{{ surveyVars.a_vmName }}"
+    template: "{{ vm.template }}"
+    cluster: "{{ vm.cluster }}"
+    datastore: "{{ vm.datastore }}"
+    hardware:
+      memory_mb: 4096
+      num_cpus: 2
+    cdrom:
+      type: "{{ vm.cdrom.type }}"
+    networks:
+    - name: 'VM Network'
+      device_type:  "{{ vm.networkAdapters[0].device_type }}" 
+      ip: "{{ vm.networkAdapters[0].ip }}"
+      netmask: "{{ vm.networkAdapters[0].netmask }}"
+      gateway: "{{ vm.networkAdapters[0].gateway }}"
+      type: "{{ vm.networkAdapters[0].type }}"
+      domain: "{{ vm.networkAdapters[0].domain }}"
+      start_connected:  "{{ vm.networkAdapters[0].start_connected }}"
+    wait_for_ip_address: False
+    state: present
+  register: newvm
