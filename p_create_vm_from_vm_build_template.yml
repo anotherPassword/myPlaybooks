@@ -1,34 +1,70 @@
 ###### Create VM from surveyVars
+---
+- name: Set Environment and Variables
+  hosts: all
+  vars: 
+    #vars from survey have to be root level vars ###########
+    vmName: ""
+    OS: ""
+    OS_Version: ""
+    Application: ""
+    Tier: ""
+    Environment: ""
+    Location: ""
+    SQL: ""
+    num_CPU: ""
+    GB_RAM: ""
+    #END vars from survey ##########
+    #set surveyVars to vars from survey to be able to pass to powershell ie JSON 
+    surveyVars:    
+      a_vmName: "{{vmName}}"
+      a_OS: "{{OS}}"
+      a_OS_Version: "{{OS_Version}}"
+      a_Application: "{{Application}}"
+      a_Tier: "{{Tier}}"
+      a_Environment: "{{Environment}}"
+      a_Location: "{{Location}}"
+      a_SQL: "{{SQL}}"
+      a_num_CPU: "{{num_CPU}}"
+      a_GB_RAM: "{{GB_RAM}}"
+      a_vcenter_CL_availableSubnets: ""
+      #END set surveyVars #########
 
-- name: "Create VM from template"
-  vmware_guest:
-    hostname: "{{ VMWARE_HOST }}"
-    username: "{{ VMWARE_USER }}"
-    password: "{{ VMWARE_PASSWORD }}"    
-    validate_certs: no
-    wait_for_customization: no
-    #folder: "{{ vmFolder }}"
-    datacenter: "{{ vm.datacenter }}"
-    name: "{{ surveyVars.a_vmName }}"
-    template: "{{ vm.template }}"
-    cluster: "{{ vm.cluster }}"
-    datastore: "{{ vm.datastore }}"
-    hardware:
-      memory_mb: 4096
-      num_cpus: 2
-    cdrom:
-      type: "{{ vm.cdrom.type }}"
-    networks:
-    - name: 'VM Network'
-      device_type:  "{{ vm.networkAdapters[0].device_type }}" 
-      ip: "{{ vm.networkAdapters[0].ip }}"
-      netmask: "{{ vm.networkAdapters[0].netmask }}"
-      gateway: "{{ vm.networkAdapters[0].gateway }}"
-      type: "{{ vm.networkAdapters[0].type }}"
-      domain: "{{ vm.networkAdapters[0].domain }}"
-      start_connected:  "{{ vm.networkAdapters[0].start_connected }}"
-    wait_for_ip_address: False
-    state: present
-  register: newvm
+  vars_files:
+  #- vars/surveyVars.yml
+  - vars/vars.yml
+ 
+  tasks:
+########### Dump SurveyVars
+  - name: "Create VM from template"
+    vmware_guest:
+      hostname: "{{ VMWARE_HOST }}"
+      username: "{{ VMWARE_USER }}"
+      password: "{{ VMWARE_PASSWORD }}"    
+      validate_certs: no
+      wait_for_customization: no
+      #folder: "{{ vmFolder }}"
+      datacenter: "{{ vm.datacenter }}"
+      name: "{{ surveyVars.a_vmName }}"
+      template: "{{ vm.template }}"
+      cluster: "{{ vm.cluster }}"
+      datastore: "{{ vm.datastore }}"
+      hardware:
+        memory_mb: 4096
+        num_cpus: 2
+      cdrom:
+        type: "{{ vm.cdrom.type }}"
+      networks:
+      - name: 'VM Network'
+        device_type:  "{{ vm.networkAdapters[0].device_type }}" 
+        ip: "{{ vm.networkAdapters[0].ip }}"
+        netmask: "{{ vm.networkAdapters[0].netmask }}"
+        gateway: "{{ vm.networkAdapters[0].gateway }}"
+        type: "{{ vm.networkAdapters[0].type }}"
+        domain: "{{ vm.networkAdapters[0].domain }}"
+        start_connected:  "{{ vm.networkAdapters[0].start_connected }}"
+      wait_for_ip_address: False
+      state: present
+    register: newvm
 
-  ######
+    ######
