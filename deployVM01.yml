@@ -42,6 +42,7 @@
   ######### CREATE VM FROM TEMPLATE (based on vm JSON)
 
   - name: "Create VM from template"
+    hosts: localhost
     vmware_guest:
       hostname: "{{ VMWARE_HOST }}"
       username: "{{ VMWARE_USER }}"
