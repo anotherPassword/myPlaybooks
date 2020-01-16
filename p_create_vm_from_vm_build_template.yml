@@ -1,5 +1,6 @@
 ###### Create VM from surveyVars
 ---
+- meta: end_play
 - name: Set Environment and Variables
   hosts: all
   vars: 
