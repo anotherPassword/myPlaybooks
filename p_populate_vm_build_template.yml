@@ -89,10 +89,10 @@
   #- meta: end_play
   
   ######## GET IP RESERVATION FOR NETWORK ADAPTER
-  - name: "set pshellScriptAction to getIPReservationForNetworkAdapter"
+  - name: "set pshellScriptAction to getDatastoreForCluster"
     set_fact:
-      pshellScriptAction: getIPReservationForNetworkAdapter      #not sent as JSON with unicode
-  - name: "Run script 'ansible_deployVM.ps1'"
+      pshellScriptAction: getIPReservationForNetworkAdapter   #not sent as JSON with unicode
+  - name: "Run script 'ansible_deployVM.ps1' and GET NETWORKS FOR CLUSTER"
     win_shell: D:\scripts\vSphere\ansible_deployVM.ps1 -pshellScriptAction "{{pshellScriptAction}}" -surveyVars "{{surveyVars }}" -userName '{{ ansible_user }}' -password '{{ ansible_password }}' -vm "{{vm }}" -networkAdapter "{{networkAdapter}}" -disk "{{disk}}" 
     register: result
   
