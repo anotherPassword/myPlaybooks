@@ -102,7 +102,7 @@
   
   - name: "The vm variable with attached adapter"
     debug: var=vm
-  #- meta: end_play   
+  - meta: end_play   
    ######## GET TEMPLATE FOR CLUSTER
   - name: "set pshellScriptAction to getVMTemplate"
     set_fact:
